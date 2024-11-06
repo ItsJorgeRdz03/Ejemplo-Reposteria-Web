@@ -17,20 +17,20 @@ app.listen(connectionData.port, () => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/img", express.static(__dirname + "/static/src/imgs"));
-app.use("/style", express.static(__dirname + "/static/styles"));
-app.use("/script", express.static(__dirname + "/static/scripts"));
+app.use("/img", express.static(path.join(__dirname, "../static/src/imgs")));
+app.use("/style", express.static(path.join(__dirname, "../static/styles")));
+app.use("/script", express.static(path.join(__dirname, "../static/scripts")));
 
 app.get("/", async (req, res) => {
-  res.sendFile(__dirname + "/static/pages/inicio.html");
+  res.sendFile(path.join(__dirname, "../static/pages/inicio.html"));
 });
 
 app.get("/login", async (req, res) => {
-  res.sendFile(__dirname + "/static/pages/login.html");
+  res.sendFile(path.join(__dirname, "../static/pages/login.html"));
 });
 
 app.get("/img", async (req, res) => {
-  res.sendFile(__dirname + "/static/src/imgs");
+  res.sendFile(path.join(__dirname, "../static/src/imgs"));
 });
 
 /*app.post("/lexer", async (req, res) => {

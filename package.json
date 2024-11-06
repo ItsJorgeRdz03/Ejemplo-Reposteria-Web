@@ -4,7 +4,7 @@
   "description": "Proyecto Final de la Unidad 4 de Programación Web",
   "main": "server.js",
   "scripts": {
-    "test": "node --watch server.js"
+    "test": "node --watch server/server.js"
   },
   "author": "Jorge Rosales",
   "license": "UNLICENSED",
