@@ -502,7 +502,7 @@ footer p {
   font-size: 24px;
   font-weight: bold;
   color: #f67280;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
 .texto {
@@ -516,16 +516,30 @@ footer p {
   text-decoration: none;
 }
 
+.p-mess {
+  margin: 25px 0 15px 0;
+}
+
 button#close,
-button#close-error,
-button#login {
+button#close-error {
   background-color: #f55a6b;
   color: white;
   border: none;
   border-radius: 5px;
-  margin-top: 20px;
   padding: 10px 20px;
   font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button#login {
+  background-color: #f8465b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
 }

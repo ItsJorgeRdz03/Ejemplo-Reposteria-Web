@@ -5,35 +5,42 @@
   font-family: "Arial", sans-serif;
 }
 
+/* Fondo */
 body {
-  background: linear-gradient(135deg, #3a506b, #5bc0be);
+  background: linear-gradient(
+    135deg,
+    #ffe6ea,
+    #fff4f7
+  ); /* Rosa pastel muy suave */
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 
+/* Contenedor del formulario */
 .form-container {
-  background-color: #ffffff;
+  background-color: #ffffff; /* Fondo blanco */
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   width: 100%;
   transition: transform 0.3s ease;
-  margin: 2% 0; /* Centrar el formulario */
+  margin: 2% 0;
 }
 
 h1 {
   text-align: center;
-  color: #1c2541;
+  color: #f87885; /* Rosa pastel principal */
   margin-bottom: 25px;
   font-size: 24px;
-  border-bottom: 2px solid #0a9396;
+  border-bottom: 2px solid #6ba292; /* Verde menta oscuro */
   padding-bottom: 10px;
   position: relative;
 }
 
+/* Ícono antes del título */
 h1:before {
   content: "✎";
   font-size: 30px;
@@ -41,18 +48,19 @@ h1:before {
   top: 50%;
   left: -35px;
   transform: translateY(-50%);
-  color: #0a9396;
+  color: #6ba292; /* Verde menta oscuro */
 }
 
 .form-group {
   margin-bottom: 20px;
 }
 
+/* Etiquetas */
 label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #1c2541;
+  color: #f87885; /* Rosa pastel principal */
 }
 
 input[type="text"],
@@ -61,29 +69,31 @@ input[type="tel"],
 input[type="date"],
 select,
 textarea {
-  width: 100%; /* Asegúrate que los inputs ocupen todo el ancho disponible */
+  width: 100%;
   padding: 12px;
   border-radius: 10px;
-  border: 2px solid #b0bec5;
+  border: 2px solid #f8a1ac; /* Bordes rosa pastel */
   font-size: 16px;
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
+/* Efecto de enfoque en los campos de entrada */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="tel"]:focus,
 input[type="date"]:focus,
 select:focus,
 textarea:focus {
-  border-color: #0a9396;
-  background-color: #edf6f9;
+  border-color: #6ba292; /* Verde menta oscuro */
+  background-color: #ffe6ea; /* Rosa muy claro */
   outline: none;
 }
 
+/* Botón de enviar */
 button[type="submit"] {
   width: 100%;
   padding: 15px;
-  background-color: #0a9396;
+  background-color: #f87885; /* Rosa pastel principal */
   border: none;
   color: white;
   font-size: 18px;
@@ -92,15 +102,18 @@ button[type="submit"] {
   transition: background-color 0.3s ease;
 }
 
+/* Hover en botón de enviar */
 button[type="submit"]:hover {
-  background-color: #005f73;
+  background-color: #f55f6c; /* Rosa pastel más oscuro */
 }
 
+/* Efecto al hacer clic en botón */
 button[type="submit"]:active {
-  background-color: #0a9396;
+  background-color: #f87885; /* Mantiene el tono inicial */
   transform: translateY(2px);
 }
 
+/* Área de texto */
 textarea {
   resize: none;
 }

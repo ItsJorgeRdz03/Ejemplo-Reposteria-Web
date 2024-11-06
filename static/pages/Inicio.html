@@ -27,8 +27,8 @@
               <li><a href="#productos">Productos</a></li>
               <li><a href="#contacto">Contáctanos</a></li>
               <li>
-                <button id="login">
-                  <a href="/login">Iniciar Sesion</a>
+                <button id="login" onclick="location.href = '/login'">
+                  Iniciar Sesion
                 </button>
               </li>
             </ul>
@@ -381,7 +381,7 @@
             ¡Hola <a id="name"></a>, tu correo <a id="email"></a> ha sido
             registrado con exito!
           </p>
-          <p>
+          <p class="p-mess">
             Pronto te enviaremos nuestras proximas novedades, ¡no te lo pierdas!
           </p>
           <button id="close">Entendido</button>
@@ -395,8 +395,7 @@
           <div class="popup-img">
             <img src="/img/error.svg" alt="Imagen verificacion" />
           </div>
-          <p class="texto"></p>
-          <p>
+          <p class="p-mess">
             Al parecer hubo un error con tus datos, por favor ingresalos
             correctamente.
           </p>

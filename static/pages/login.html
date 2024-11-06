@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulario de Inscripción</title>
-    <link rel="stylesheet" href="../styles/loginStyle.css" />
+    <link rel="stylesheet" href="/style/loginStyle.css" />
   </head>
   <body>
     <div class="form-container">
@@ -68,26 +68,17 @@
           />
         </div>
         <div class="form-group">
-          <label for="carrera">Carrera</label>
+          <label for="gender">Género</label>
           <select
-            id="carrera"
-            name="carrera"
+            id="gender"
+            name="gender"
             required
             oninvalid="this.setCustomValidity('Por favor rellena este campo')"
           >
-            <option value="" disabled selected>Selecciona tu carrera</option>
-            <option value="Ingenieria en Sistemas Comptacionales">
-              Sistemas Comptacionales
-            </option>
-            <option value="Ingenieria en Mecatronica">Mecatronica</option>
-            <option value="Ingenieria en Mecanica">Mecanica</option>
-            <option value="Ingenieria en Quimica">Quimica</option>
-            <option value="Ingenieria en Gestion Empresarial">
-              Gestion Empresarial
-            </option>
-            <option value="Ingenieria en Logistica">Logistica</option>
-            <option value="Licenciatura en Contabilidad">Contabilidad</option>
-            <option value="Ingenieria Industrial">Industrial</option>
+            <option value="" disabled selected>Selecciona tu género</option>
+            <option value=Hombre">Hombre</option>
+            <option value="Mujer">Mujer</option>
+            <option value="Otro">Otro</option>
           </select>
         </div>
         <div class="form-group">
@@ -99,52 +90,6 @@
             required
             oninvalid="this.setCustomValidity('Por favor rellena este campo')"
           />
-        </div>
-        <div class="address-form">
-          <div class="form-group">
-            <label for="calle">Calle</label>
-            <input
-              type="text"
-              id="calle"
-              name="calle"
-              placeholder="Ingresa tu calle"
-              required
-              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
-            />
-          </div>
-          <div class="form-group">
-            <label for="nCasa">No. del domicio</label>
-            <input
-              type="text"
-              id="nCasa"
-              name="nCasa"
-              placeholder="Ingresa el numero de tu casa"
-              required
-              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
-            />
-          </div>
-          <div class="form-group">
-            <label for="colonia">Colonia</label>
-            <input
-              type="text"
-              id="colonia"
-              name="colonia"
-              placeholder="Ingresa tu colonia"
-              required
-              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
-            />
-          </div>
-          <div class="form-group">
-            <label for="codigo-postal">Código Postal</label>
-            <input
-              type="text"
-              id="codigo-postal"
-              name="codigo-postal"
-              placeholder="Ingresa tu código postal"
-              required
-              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
-            />
-          </div>
         </div>
 
         <div class="data-group">
