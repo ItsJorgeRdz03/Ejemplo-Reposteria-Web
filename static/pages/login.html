@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Inscripción</title>
+    <link rel="stylesheet" href="../styles/loginStyle.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <h1>Formulario de Inscripción</h1>
+      <form id="form">
+        <div class="name-form">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              placeholder="Ingresa tu nombre"
+              required
+              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+            />
+          </div>
+          <div class="form-group apellidos">
+            <label for="apellidoP">Apellido Paterno</label>
+            <input
+              type="text"
+              id="apellidoP"
+              name="apellidoP"
+              placeholder="Ingresa tu apellido"
+              required
+              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+            />
+          </div>
+          <div class="form-group apellidos">
+            <label for="apellidoM">Apellido Materno</label>
+            <input
+              type="text"
+              id="apellidoM"
+              name="apellidoM"
+              placeholder="Ingresa tu apellido"
+              required
+              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo Electrónico</label>
+          <input
+            type="email"
+            id="correo"
+            name="correo"
+            placeholder="ejemplo@correo.com"
+            required
+            oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+          />
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            placeholder="123-456-7890"
+            required
+            oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+          />
+        </div>
+        <div class="form-group">
+          <label for="carrera">Carrera</label>
+          <select
+            id="carrera"
+            name="carrera"
+            required
+            oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+          >
+            <option value="" disabled selected>Selecciona tu carrera</option>
+            <option value="Ingenieria en Sistemas Comptacionales">
+              Sistemas Comptacionales
+            </option>
+            <option value="Ingenieria en Mecatronica">Mecatronica</option>
+            <option value="Ingenieria en Mecanica">Mecanica</option>
+            <option value="Ingenieria en Quimica">Quimica</option>
+            <option value="Ingenieria en Gestion Empresarial">
+              Gestion Empresarial
+            </option>
+            <option value="Ingenieria en Logistica">Logistica</option>
+            <option value="Licenciatura en Contabilidad">Contabilidad</option>
+            <option value="Ingenieria Industrial">Industrial</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fecha-n">Fecha de Nacimiento</label>
+          <input
+            type="date"
+            id="fecha-n"
+            name="fecha-n"
+            required
+            oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+          />
+        </div>
+        <div class="address-form">
+          <div class="form-group">
+            <label for="calle">Calle</label>
+            <input
+              type="text"
+              id="calle"
+              name="calle"
+              placeholder="Ingresa tu calle"
+              required
+              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+            />
+          </div>
+          <div class="form-group">
+            <label for="nCasa">No. del domicio</label>
+            <input
+              type="text"
+              id="nCasa"
+              name="nCasa"
+              placeholder="Ingresa el numero de tu casa"
+              required
+              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+            />
+          </div>
+          <div class="form-group">
+            <label for="colonia">Colonia</label>
+            <input
+              type="text"
+              id="colonia"
+              name="colonia"
+              placeholder="Ingresa tu colonia"
+              required
+              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+            />
+          </div>
+          <div class="form-group">
+            <label for="codigo-postal">Código Postal</label>
+            <input
+              type="text"
+              id="codigo-postal"
+              name="codigo-postal"
+              placeholder="Ingresa tu código postal"
+              required
+              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+            />
+          </div>
+        </div>
+
+        <div class="data-group">
+          <button type="submit" id="SendBtn">Enviar Solicitud</button>
+        </div>
+      </form>
+    </div>
+    <script src="scripts/script.js"></script>
+  </body>
+</html>
