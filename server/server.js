@@ -1,7 +1,7 @@
 import express, { text } from "express";
 import path from "path";
 import { servidor, __dirname } from "./data.js";
-import { test } from "./query.js";
+import { test } from "./database.js";
 
 const app = express();
 

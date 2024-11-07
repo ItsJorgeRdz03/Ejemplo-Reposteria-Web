@@ -3,7 +3,7 @@ import { conexionDB } from "./data.js";
 
 const messageError = "Ha ocurrido un error con tu consulta: ";
 
-export const connection = mysql.createPool({
+const connection = mysql.createPool({
   host: conexionDB.HOST,
   user: conexionDB.USER,
   password: conexionDB.PASSWORD,
@@ -16,4 +16,21 @@ export const connection = mysql.createPool({
   queueLimit: 0,
 });
 
-export default connection;
+export async function test() {
+  try {
+    console.log("Consulta iniciada");
+    let query = "SELECT * FROM producto";
+    const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
+    endConnection();
+    return rows; // Retornamos las filas afectadas
+  } catch (err) {
+    console.error(messageError, err);
+  }
+}
+
+async function endConnection() {
+  if (connection) {
+    console.log("Consulta terminada");
+    await connection.releaseConnection();
+  }
+}
