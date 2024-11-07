@@ -6,12 +6,29 @@ var nom = "";
 var nomC = "";
 var correo = "";
 
+function startRequest(method, url, data, bool) {
+  const req = new XMLHttpRequest();
+  req.onreadystatechange = function () {
+    if (req.readyState == XMLHttpRequest.DONE) {
+      console.log(req.responseText);
+      //output.value = req.responseText;
+    }
+  };
+  req.open(method, url, bool);
+  req.send(data);
+  //req.setRequestHeader("Content-type", "application/json");
+  //req.send(JSON.stringify(data));
+}
+
 document.getElementById("resBtn").addEventListener("click", (e) => {
   e.preventDefault();
   let tNombre = document.getElementById("nombre").value.trim();
   let tEmail = document.getElementById("correo").value.trim();
   checkName(tNombre);
   checkEmail(tEmail);
+
+  startRequest("POST", "test", "", true);
+
   if (nomC != "" && correo != "") {
     setInfoText();
     document.querySelector(".popup").classList.add("show");
