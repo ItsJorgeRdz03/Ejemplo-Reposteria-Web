@@ -2,10 +2,9 @@ import express, { text } from "express";
 import { fileURLToPath } from "url";
 import path from "path";
 import dotenv from "dotenv";
-import { env } from "process";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config(path.resolve());
+dotenv.config({ path: __dirname + "/.env" });
 
 // Configuracion de la base de datos
 export const conexionDB = {
