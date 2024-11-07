@@ -1,7 +1,7 @@
 import express, { text } from "express";
 import path from "path";
 import { servidor, __dirname } from "./data.js";
-import { test } from "./database.js";
+import { getBestProd, getBestProdInfo } from "./database.js";
 
 const app = express();
 
@@ -27,12 +27,40 @@ app.get("/img", async (req, res) => {
   res.sendFile(path.join(__dirname, "../static/src/imgs"));
 });
 
+app.get("/api/admin", async (req, res) => {
+  res.send("Funcionando");
+});
+
+app.get("/api/bestProducts", async (req, res) => {
+  try {
+    const data = await getBestProd();
+    console.log(data);
+    res.json(data);
+  } catch (err) {
+    console.error(messageError, err);
+    res.status(500).send(messageError);
+  }
+});
+
+app.get("/api/bestProductsInfo", async (req, res) => {
+  try {
+    const data = await getBestProdInfo();
+    console.log(data);
+    res.json(data);
+  } catch (err) {
+    console.error(messageError, err);
+    res.status(500).send(messageError);
+  }
+});
+
 app.post("/test", async (req, res) => {
   let data = await test();
   console.log(data);
   res.send(data).end;
   data = "";
 });
+
+const messageError = "Ha ocurrido un error al procesar tu peticion: ";
 
 /*app.post("/parser", async (req, res) => {
   if (req.body.string === "") {

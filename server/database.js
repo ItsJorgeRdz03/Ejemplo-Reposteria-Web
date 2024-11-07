@@ -16,6 +16,37 @@ const connection = mysql.createPool({
   queueLimit: 0,
 });
 
+async function endConnection() {
+  if (connection) {
+    console.log("Consulta terminada");
+    await connection.releaseConnection();
+  }
+}
+
+export async function getBestProd() {
+  try {
+    console.log("Consulta iniciada");
+    let query = "CALL getBestProducts();";
+    const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
+    endConnection();
+    return rows; // Retornamos las filas afectadas
+  } catch (err) {
+    console.error(messageError, err);
+  }
+}
+
+export async function getBestProdInfo() {
+  try {
+    console.log("Consulta iniciada");
+    let query = "CALL getBestProductsInfo();";
+    const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
+    endConnection();
+    return rows; // Retornamos las filas afectadas
+  } catch (err) {
+    console.error(messageError, err);
+  }
+}
+
 export async function test() {
   try {
     console.log("Consulta iniciada");
@@ -25,12 +56,5 @@ export async function test() {
     return rows; // Retornamos las filas afectadas
   } catch (err) {
     console.error(messageError, err);
-  }
-}
-
-async function endConnection() {
-  if (connection) {
-    console.log("Consulta terminada");
-    await connection.releaseConnection();
   }
 }
