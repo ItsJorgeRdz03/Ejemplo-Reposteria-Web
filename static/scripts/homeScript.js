@@ -6,18 +6,28 @@ var nom = "";
 var nomC = "";
 var correo = "";
 
-function startRequest(method, url, data, bool) {
-  const req = new XMLHttpRequest();
-  req.onreadystatechange = function () {
-    if (req.readyState == XMLHttpRequest.DONE) {
-      console.log(req.responseText);
-      //output.value = req.responseText;
-    }
-  };
-  req.open(method, url, bool);
-  req.send(data);
-  //req.setRequestHeader("Content-type", "application/json");
-  //req.send(JSON.stringify(data));
+async function getProducts() {
+  let respuestaJson = null;
+  const res = await fetch("/api/bestProducts", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  respuestaJson = await res.json();
+  console.log(respuestaJson);
+}
+
+async function getProductsInfo() {
+  let respuestaJson = null;
+  const res = await fetch("/api/bestProductsInfo", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  respuestaJson = await res.json();
+  console.log(respuestaJson);
 }
 
 document.getElementById("resBtn").addEventListener("click", (e) => {
@@ -27,7 +37,8 @@ document.getElementById("resBtn").addEventListener("click", (e) => {
   checkName(tNombre);
   checkEmail(tEmail);
 
-  startRequest("POST", "test", "", true);
+  getProducts();
+  getProductsInfo();
 
   if (nomC != "" && correo != "") {
     setInfoText();
