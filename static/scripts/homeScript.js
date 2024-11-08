@@ -15,7 +15,15 @@ async function getProducts() {
     },
   });
   respuestaJson = await res.json();
+  respuestaJson = respuestaJson[0];
   console.log(respuestaJson);
+
+  const filas = document.querySelectorAll(".productos-box .producto-item");
+  for (let i = 0; i < filas.length; i++) {
+    filas[i].querySelector("img").src = respuestaJson[i].img;
+    filas[i].querySelector("h3").innerText = respuestaJson[i].nombre;
+    filas[i].querySelector("ul").innerText = respuestaJson[i].descr;
+  }
 }
 
 async function getProductsInfo() {
@@ -27,7 +35,21 @@ async function getProductsInfo() {
     },
   });
   respuestaJson = await res.json();
+  respuestaJson = respuestaJson[0];
   console.log(respuestaJson);
+
+  const filas = document.querySelectorAll(".tabla-precios tbody tr");
+  for (let i = 0; i < filas.length; i++) {
+    const columna = filas[i].querySelectorAll("td");
+    let bool = "No";
+    if (respuestaJson[i].personalizable == 1) {
+      bool = "Sí";
+    }
+    columna[0].innerText = respuestaJson[i].nombre;
+    columna[1].innerText = "$" + respuestaJson[i].precio;
+    columna[2].innerText = respuestaJson[i].sabor;
+    columna[3].innerText = bool;
+  }
 }
 
 document.getElementById("resBtn").addEventListener("click", (e) => {
@@ -36,9 +58,6 @@ document.getElementById("resBtn").addEventListener("click", (e) => {
   let tEmail = document.getElementById("correo").value.trim();
   checkName(tNombre);
   checkEmail(tEmail);
-
-  getProducts();
-  getProductsInfo();
 
   if (nomC != "" && correo != "") {
     setInfoText();
@@ -104,3 +123,6 @@ function setInfoText() {
   document.getElementById("name").innerText = nomC;
   document.getElementById("email").innerText = correo;
 }
+
+getProducts();
+getProductsInfo();
