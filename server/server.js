@@ -1,7 +1,7 @@
 import express, { text } from "express";
 import path from "path";
 import { servidor, __dirname } from "./data.js";
-import { getBestProd, getBestProdInfo } from "./database.js";
+import { getBestProd, getBestProdInfo, setSuscripcion } from "./database.js";
 
 const app = express();
 
@@ -34,7 +34,7 @@ app.get("/api/admin", async (req, res) => {
 app.get("/api/bestProducts", async (req, res) => {
   try {
     const data = await getBestProd();
-    console.log(data);
+    //console.log(data);
     res.json(data);
   } catch (err) {
     console.error(messageError, err);
@@ -45,6 +45,18 @@ app.get("/api/bestProducts", async (req, res) => {
 app.get("/api/bestProductsInfo", async (req, res) => {
   try {
     const data = await getBestProdInfo();
+    //console.log(data);
+    res.json(data);
+  } catch (err) {
+    console.error(messageError, err);
+    res.status(500).send(messageError);
+  }
+});
+
+app.post("/api/setSuscripcion", async (req, res) => {
+  try {
+    console.log(req.body);
+    const data = await getBestProdInfo(req.body);
     console.log(data);
     res.json(data);
   } catch (err) {

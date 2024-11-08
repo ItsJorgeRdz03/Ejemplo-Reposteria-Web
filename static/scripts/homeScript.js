@@ -3,8 +3,12 @@ const nombreRegex = new RegExp(
 );
 const emailRegex = new RegExp("^\\w+@[a-zA-Z_]+?(\\.[a-zA-Z]{2,3}){1,2}$");
 var nom = "";
-var nomC = "";
 var correo = "";
+var data = {
+  nombre: "",
+  ap: "",
+  email: "",
+};
 
 async function getProducts() {
   let respuestaJson = null;
@@ -59,8 +63,10 @@ document.getElementById("resBtn").addEventListener("click", (e) => {
   checkName(tNombre);
   checkEmail(tEmail);
 
-  if (nomC != "" && correo != "") {
+  if (data.nombre != "" && data.ap != "" && data.email != "") {
     setInfoText();
+    console.log(data);
+
     document.querySelector(".popup").classList.add("show");
     document.body.style.overflow = "hidden";
   } else {
@@ -71,11 +77,16 @@ document.getElementById("resBtn").addEventListener("click", (e) => {
 
 document.getElementById("close").addEventListener("click", () => {
   nom = "";
-  nomC = "";
   correo = "";
-  setInfoText();
-  document.querySelector(".popup").classList.remove("show");
-  document.body.style.overflow = "visible";
+  data.nombre = "";
+  data.ap = "";
+  data.email = "";
+  let res = setInfoText();
+  if (res) {
+    document.querySelector(".popup").classList.remove("show");
+    document.body.style.overflow = "visible";
+  }
+  //definir caso donde se cancela consulta
 });
 
 document.getElementById("close-error").addEventListener("click", () => {
@@ -90,7 +101,8 @@ function checkName(name) {
     return false;
   }
   nom = capitlizeText(name);
-  nomC = getFistName(nom);
+  data.nombre = getFistName(nom);
+  data.ap = getLastName(nom);
   return true;
 }
 
@@ -101,6 +113,7 @@ function checkEmail(email) {
     return false;
   }
   correo = email;
+  data.email = correo;
   return true;
 }
 
@@ -119,9 +132,26 @@ function getFistName(name) {
   return nArray[0];
 }
 
-function setInfoText() {
-  document.getElementById("name").innerText = nomC;
+function getLastName(name) {
+  let nArray = name.split(/(\s+)/);
+  return nArray[1];
+}
+
+async function setInfoText() {
+  document.getElementById("name").innerText = data.nombre;
   document.getElementById("email").innerText = correo;
+
+  let respuestaJson = null;
+  const res = await fetch("/api/setSuscripcion", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  respuestaJson = await res.json();
+  respuestaJson = respuestaJson[0];
+  return respuestaJson;
 }
 
 getProducts();

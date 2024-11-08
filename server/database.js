@@ -47,6 +47,18 @@ export async function getBestProdInfo() {
   }
 }
 
+export async function setSuscripcion(data) {
+  try {
+    console.log("Consulta iniciada");
+    let query = `SELECT setSuscripcion(${data.nombre}, ${data.ap}, ${data.email});`;
+    const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
+    endConnection();
+    return rows; // Retornamos las filas afectadas
+  } catch (err) {
+    console.error(messageError, err);
+  }
+}
+
 export async function test() {
   try {
     console.log("Consulta iniciada");
