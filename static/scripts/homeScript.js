@@ -56,20 +56,28 @@ async function getProductsInfo() {
   }
 }
 
-document.getElementById("resBtn").addEventListener("click", (e) => {
+document.getElementById("resBtn").addEventListener("click", async (e) => {
   e.preventDefault();
   let tNombre = document.getElementById("nombre").value.trim();
   let tEmail = document.getElementById("correo").value.trim();
   checkName(tNombre);
   checkEmail(tEmail);
 
-  if (data.nombre != "" && data.ap != "" && data.email != "") {
-    setInfoText();
-    console.log(data);
-
-    document.querySelector(".popup").classList.add("show");
-    document.body.style.overflow = "hidden";
+  if (data.nombre != "" && data.ap != null && data.email != "") {
+    let res = await setInfoText();
+    console.log(res);
+    if (res.res == 1) {
+      document.querySelector(".popup").classList.add("show");
+      document.body.style.overflow = "hidden";
+    } else {
+      document.querySelector(".popup-error p").innerText =
+        "Este correo ya está registrado, por favor ingresa usa otro.";
+      document.querySelector(".popup-error").classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
   } else {
+    document.querySelector(".popup-error p").innerText =
+      "Al parecer hubo un error con tus datos, por favor ingresalos correctamente.";
     document.querySelector(".popup-error").classList.add("show");
     document.body.style.overflow = "hidden";
   }
@@ -81,12 +89,9 @@ document.getElementById("close").addEventListener("click", () => {
   data.nombre = "";
   data.ap = "";
   data.email = "";
-  let res = setInfoText();
-  if (res) {
-    document.querySelector(".popup").classList.remove("show");
-    document.body.style.overflow = "visible";
-  }
-  //definir caso donde se cancela consulta
+
+  document.querySelector(".popup").classList.remove("show");
+  document.body.style.overflow = "visible";
 });
 
 document.getElementById("close-error").addEventListener("click", () => {
@@ -103,6 +108,7 @@ function checkName(name) {
   nom = capitlizeText(name);
   data.nombre = getFistName(nom);
   data.ap = getLastName(nom);
+  console.log(data.ap);
   return true;
 }
 
@@ -134,7 +140,11 @@ function getFistName(name) {
 
 function getLastName(name) {
   let nArray = name.split(/(\s+)/);
-  return nArray[1];
+  if (nArray[2] != "" || nArray[2] != " ") {
+    return nArray[2];
+  } else {
+    return null;
+  }
 }
 
 async function setInfoText() {
