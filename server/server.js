@@ -55,8 +55,8 @@ app.get("/api/bestProductsInfo", async (req, res) => {
 
 app.post("/api/setSuscripcion", async (req, res) => {
   try {
-    console.log(req.body);
-    const data = await getBestProdInfo(req.body);
+    //console.log(req.body);
+    const data = await setSuscripcion(req.body);
     console.log(data);
     res.json(data);
   } catch (err) {
