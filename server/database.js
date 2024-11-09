@@ -50,7 +50,7 @@ export async function getBestProdInfo() {
 export async function setSuscripcion(data) {
   try {
     console.log("Consulta iniciada");
-    let query = `SELECT setSuscripcion(${data.nombre}, ${data.ap}, ${data.email});`;
+    let query = `SELECT setSuscripcion("${data.nombre}", "${data.ap}", "${data.email}") as res;`;
     const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
     endConnection();
     return rows; // Retornamos las filas afectadas
