@@ -1,119 +1,131 @@
-* {
+/* Configuración básica */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Arial", sans-serif;
 }
 
-/* Fondo */
 body {
-  background: linear-gradient(
-    135deg,
-    #ffe6ea,
-    #fff4f7
-  ); /* Rosa pastel muy suave */
+  font-family: "Arial", sans-serif;
+  background-color: #fff7f9; /* Fondo suave para una apariencia elegante */
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
+  color: #333;
+}
+
+h1 {
+  color: #f87885; /* Color rosa pastel para el título */
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 1em;
 }
 
 /* Contenedor del formulario */
 .form-container {
-  background-color: #ffffff; /* Fondo blanco */
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  width: 100%;
-  transition: transform 0.3s ease;
-  margin: 2% 0;
-}
-
-h1 {
-  text-align: center;
-  color: #f87885; /* Rosa pastel principal */
-  margin-bottom: 25px;
-  font-size: 24px;
-  border-bottom: 2px solid #6ba292; /* Verde menta oscuro */
-  padding-bottom: 10px;
-  position: relative;
-}
-
-/* Ícono antes del título */
-h1:before {
-  content: "✎";
-  font-size: 30px;
-  position: absolute;
-  top: 50%;
-  left: -35px;
-  transform: translateY(-50%);
-  color: #6ba292; /* Verde menta oscuro */
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-/* Etiquetas */
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #f87885; /* Rosa pastel principal */
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="date"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
+  background-color: #ffffff;
   border-radius: 10px;
-  border: 2px solid #f8a1ac; /* Bordes rosa pastel */
-  font-size: 16px;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 2em 0;
+  padding: 2em 0;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
 }
 
-/* Efecto de enfoque en los campos de entrada */
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-input[type="date"]:focus,
-select:focus,
-textarea:focus {
-  border-color: #6ba292; /* Verde menta oscuro */
-  background-color: #ffe6ea; /* Rosa muy claro */
+#form-title,
+#form {
+  padding: 0 2em;
+}
+
+/* Botones de alternancia */
+.toggle-buttons {
+  display: flex;
+  margin-bottom: 1.5em;
+}
+
+.toggle-buttons a {
+  background-color: white; /* Botones en color rosa pastel */
+  border: none;
+  color: #9e9e9e;
+  font-size: 1em;
+  font-weight: bolder;
+  width: 50%;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-buttons a:hover {
+  background-color: white;
+  background-image: linear-gradient(
+    white,
+    #dbd3d3
+  ); /* Color más oscuro para hover */
+  color: #e0656f;
+  border-color: #e0656f;
+  border-style: none none solid none;
+}
+
+/* Campos del formulario */
+.form-group {
+  margin-bottom: 1.2em;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 0.9em;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.7em;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 0.5em;
+}
+
+input::placeholder {
+  color: #bbb;
+}
+
+input:focus,
+select:focus {
   outline: none;
+  border-color: #f87885;
+  box-shadow: 0 0 5px rgba(248, 120, 133, 0.5);
 }
 
 /* Botón de enviar */
-button[type="submit"] {
+.data-group button {
   width: 100%;
-  padding: 15px;
-  background-color: #f87885; /* Rosa pastel principal */
+  padding: 0.7em;
+  font-size: 1em;
+  background-color: #f87885;
   border: none;
   color: white;
-  font-size: 18px;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
+  margin-top: 1em;
 }
 
-/* Hover en botón de enviar */
-button[type="submit"]:hover {
-  background-color: #f55f6c; /* Rosa pastel más oscuro */
+.data-group button:hover {
+  background-color: #e0656f;
 }
 
-/* Efecto al hacer clic en botón */
-button[type="submit"]:active {
-  background-color: #f87885; /* Mantiene el tono inicial */
-  transform: translateY(2px);
+/* Estilos de mensaje de error */
+input:invalid {
+  border-color: #d9534f; /* Rojo para campos inválidos */
 }
 
-/* Área de texto */
-textarea {
-  resize: none;
+input:invalid:focus {
+  border-color: #d9534f;
+  box-shadow: 0 0 5px rgba(217, 83, 79, 0.5);
 }

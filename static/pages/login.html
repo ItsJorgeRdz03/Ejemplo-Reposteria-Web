@@ -3,14 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Formulario de Inscripción</title>
+    <title>Login y Registro</title>
     <link rel="stylesheet" href="/style/loginStyle.css" />
   </head>
   <body>
     <div class="form-container">
-      <h1>Formulario de Inscripción</h1>
+      <h1 id="form-title">Iniciar Sesión</h1>
+
+      <!-- Botones para alternar entre Login y Registro -->
+      <div class="toggle-buttons">
+        <a type="button" id="loginBtn" onclick="showLogin()">
+          Iniciar Sesión
+        </a>
+        <a type="button" id="registerBtn" onclick="showRegister()">
+          Registrarse
+        </a>
+      </div>
+
+      <!-- Formulario compartido para Login y Registro -->
       <form id="form">
-        <div class="name-form">
+        <!-- Campos adicionales para el registro -->
+        <div class="name-form" id="registerFields" style="display: none">
           <div class="form-group">
             <label for="nombre">Nombre</label>
             <input
@@ -44,7 +57,44 @@
               oninvalid="this.setCustomValidity('Por favor rellena este campo')"
             />
           </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input
+              type="tel"
+              id="telefono"
+              name="telefono"
+              placeholder="123-456-7890"
+              required
+              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+            />
+          </div>
+          <div class="form-group">
+            <label for="gender">Género</label>
+            <select
+              id="gender"
+              name="gender"
+              required
+              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+            >
+              <option value="" disabled selected>Selecciona tu género</option>
+              <option value="Hombre">Hombre</option>
+              <option value="Mujer">Mujer</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fecha-n">Fecha de Nacimiento</label>
+            <input
+              type="date"
+              id="fecha-n"
+              name="fecha-n"
+              required
+              oninvalid="this.setCustomValidity('Por favor rellena este campo')"
+            />
+          </div>
         </div>
+
+        <!-- Campos comunes para Login y Registro -->
         <div class="form-group">
           <label for="correo">Correo Electrónico</label>
           <input
@@ -57,46 +107,21 @@
           />
         </div>
         <div class="form-group">
-          <label for="telefono">Teléfono</label>
+          <label for="password">Contraseña</label>
           <input
-            type="tel"
-            id="telefono"
-            name="telefono"
-            placeholder="123-456-7890"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Ingresa tu contraseña"
             required
             oninvalid="this.setCustomValidity('Por favor rellena este campo')"
           />
         </div>
-        <div class="form-group">
-          <label for="gender">Género</label>
-          <select
-            id="gender"
-            name="gender"
-            required
-            oninvalid="this.setCustomValidity('Por favor rellena este campo')"
-          >
-            <option value="" disabled selected>Selecciona tu género</option>
-            <option value=Hombre">Hombre</option>
-            <option value="Mujer">Mujer</option>
-            <option value="Otro">Otro</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="fecha-n">Fecha de Nacimiento</label>
-          <input
-            type="date"
-            id="fecha-n"
-            name="fecha-n"
-            required
-            oninvalid="this.setCustomValidity('Por favor rellena este campo')"
-          />
-        </div>
-
         <div class="data-group">
-          <button type="submit" id="SendBtn">Enviar Solicitud</button>
+          <button type="submit" id="sendBtn">Iniciar Sesión</button>
         </div>
       </form>
     </div>
-    <script src="scripts/script.js"></script>
+    <script src="/script/loginScript.js"></script>
   </body>
 </html>
