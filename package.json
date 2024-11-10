@@ -4,14 +4,17 @@
   "description": "Proyecto Final de la Unidad 4 de Programación Web",
   "main": "server.js",
   "scripts": {
-    "test": "node --watch server/server.js"
+    "test": "nodemon --watch server/server.js"
   },
   "author": "Jorge Rosales",
   "license": "UNLICENSED",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "express-session": "^1.18.1",
     "mysql2": "^3.11.3",
+    "nodemon": "^3.1.7",
     "path": "^0.12.7",
     "url": "^0.11.4"
   },
