@@ -23,6 +23,10 @@ app.get("/login", async (req, res) => {
   res.sendFile(path.join(__dirname, "../static/pages/login.html"));
 });
 
+app.get("/reservar", async (req, res) => {
+  res.sendFile(path.join(__dirname, "../static/pages/productos.html"));
+});
+
 app.get("/img", async (req, res) => {
   res.sendFile(path.join(__dirname, "../static/src/imgs"));
 });

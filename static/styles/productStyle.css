@@ -1,0 +1,111 @@
+/* Estilo General */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff7f9;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+header h1 {
+  color: #f87885;
+  font-size: 2em;
+  margin: 0.5em 0;
+}
+
+header p {
+  font-size: 1.1em;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Grid de Productos */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2em;
+  max-width: 1200px;
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Tarjeta de Producto */
+.product-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Imagen del Producto */
+.product-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Información del Producto */
+.product-info {
+  padding: 1.5em;
+  text-align: center;
+}
+
+.product-info h2 {
+  font-size: 1.4em;
+  color: #f87885;
+  margin-bottom: 0.5em;
+}
+
+.product-description {
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 1em;
+}
+
+.product-price {
+  font-size: 1.2em;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+/* Botón de Reservar */
+.reserve-btn {
+  background-color: #f87885;
+  color: white;
+  padding: 0.8em 1.5em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.reserve-btn:hover {
+  background-color: #e0656f;
+}
+
+/* Pie de página */
+footer {
+  text-align: center;
+  padding: 1em;
+  background-color: #fdf2f5;
+  width: 100%;
+  color: #555;
+  margin-top: 2em;
+}
