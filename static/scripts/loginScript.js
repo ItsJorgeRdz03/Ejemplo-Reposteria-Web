@@ -1,65 +1,56 @@
-const tabs = document.querySelector(".toggle-buttons a");
-const loginTab = document.getElementById("loginBtn");
-const registerTab = document.getElementById("registerBtn");
+//const tabs = document.querySelector(".toggle-buttons a");
+//const loginTab = document.getElementById("loginBtn");
+//const registerTab = document.getElementById("registerBtn");
+const sendBtn = document.getElementById("sendBtn");
+const nombre = document.getElementById("nombre");
+const apellidoP = document.getElementById("apellidoP");
+const apellidoM = document.getElementById("apellidoM");
+const tel = document.getElementById("telefono");
+const gender = document.getElementById("gender");
+const fechaN = document.getElementById("fecha-n");
+const email = document.getElementById("correo");
+const pass = document.getElementById("password");
 
 function showRegister() {
   document.getElementById("form-title").innerText = "Registrarse";
   document.getElementById("registerFields").style.display = "block";
   document.getElementById("sendBtn").innerText = "Registrarse";
-  //setClicked(registerTab, loginTab);
 }
 
 function showLogin() {
   document.getElementById("form-title").innerText = "Iniciar Sesión";
   document.getElementById("registerFields").style.display = "none";
   document.getElementById("sendBtn").innerText = "Iniciar Sesión";
-  //setClicked(loginTab, registerTab);
 }
 
-loginTab.addEventListener("click", () => {
-  loginTab.style.backgroundColor = "white";
-  loginTab.style.backgroundImage = "linear-gradient(white, #dbd3d3)";
-  loginTab.style.color = "#808080";
-  loginTab.style.borderColor = "#e0656f";
-  loginTab.style.borderStyle = "none none solid none";
-
-  registerTab.style.backgroundColor = "white";
-  registerTab.style.backgroundImage = "none";
-  registerTab.style.color = "#9e9e9e";
-  registerTab.style.borderStyle = "none";
+sendBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  if (sendBtn.innerText == "Iniciar Sesión") {
+    /*const res = await fetch("/api/setLogin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email.value, pass: pass.value }),
+    });*/
+  } else {
+    /*const res = await fetch("/api/setUsuario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nombre: nombre.value,
+        ap: apellidoP.value,
+        am: apellidoM.value,
+        tel: tel.value,
+        gen: gender.value,
+        fecha: fechaN.value,
+        email: email.value,
+        pass: pass.value,
+      }),
+    });*/
+  }
 });
 
-registerTab.addEventListener("click", () => {
-  registerTab.style.backgroundColor = "white";
-  registerTab.style.backgroundImage = "linear-gradient(white, #dbd3d3)";
-  registerTab.style.color = "#808080";
-  registerTab.style.borderColor = "#e0656f";
-  registerTab.style.borderStyle = "none none solid none";
-
-  loginTab.style.backgroundColor = "white";
-  loginTab.style.backgroundImage = "none";
-  loginTab.style.color = "#9e9e9e";
-  loginTab.style.borderStyle = "none";
-});
-
-tabs.addEventListener("mouseover", () => {
-  tabs.style.backgroundColor = "white";
-  tabs.style.backgroundImage = "linear-gradient(white, #dbd3d3)";
-  tabs.style.color = "#e0656f";
-  tabs.style.borderColor = "#e0656f";
-  tabs.style.borderStyle = "none none solid none";
-});
-
-tabs.addEventListener("mouseout", () => {
-  tabs.style.backgroundColor = "white";
-  tabs.style.backgroundImage = "none";
-  tabs.style.color = "#9e9e9e";
-  tabs.style.borderStyle = "none";
-});
-
-loginTab.style.backgroundColor = "white";
-loginTab.style.backgroundImage = "linear-gradient(white, #dbd3d3)";
-loginTab.style.color = "#808080";
-loginTab.style.borderColor = "#e0656f";
-loginTab.style.borderStyle = "none none solid none";
 showLogin();
