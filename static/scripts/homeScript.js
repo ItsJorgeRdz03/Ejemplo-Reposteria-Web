@@ -2,13 +2,6 @@ const nombreRegex = new RegExp(
   "^[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+(\\s+[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+)+$"
 );
 const emailRegex = new RegExp("^\\w+@[a-zA-Z_]+?(\\.[a-zA-Z]{2,3}){1,2}$");
-var nom = "";
-var correo = "";
-var data = {
-  nombre: "",
-  ap: "",
-  email: "",
-};
 
 async function getProducts() {
   let respuestaJson = null;
@@ -40,7 +33,6 @@ async function getProductsInfo() {
   });
   respuestaJson = await res.json();
   respuestaJson = respuestaJson[0];
-  console.log(respuestaJson);
 
   const filas = document.querySelectorAll(".tabla-precios tbody tr");
   for (let i = 0; i < filas.length; i++) {
@@ -60,22 +52,21 @@ document.getElementById("resBtn").addEventListener("click", async (e) => {
   e.preventDefault();
   let tNombre = document.getElementById("nombre").value.trim();
   let tEmail = document.getElementById("correo").value.trim();
-  checkName(tNombre);
-  checkEmail(tEmail);
-
-  if (data.nombre != "" && data.ap != null && data.email != "") {
-    let res = await setInfoText();
-    console.log(res);
-    if (res.res == 1) {
-      document.querySelector(".popup").classList.add("show");
-      document.body.style.overflow = "hidden";
-    } else {
-      document.querySelector(".popup-error p").innerText =
-        "Este correo ya está registrado, por favor ingresa usa otro.";
-      document.querySelector(".popup-error").classList.add("show");
-      document.body.style.overflow = "hidden";
-    }
-  } else {
+  let data = {
+    name: tNombre,
+    email: tEmail,
+  };
+  let res = await setInfoText(data);
+  console.log(res);
+  if (res == 1) {
+    document.querySelector(".popup").classList.add("show");
+    document.body.style.overflow = "hidden";
+  } else if (res == 0) {
+    document.querySelector(".popup-error p").innerText =
+      "Este correo ya está registrado, por favor ingresa usa otro.";
+    document.querySelector(".popup-error").classList.add("show");
+    document.body.style.overflow = "hidden";
+  } else if (res == 2) {
     document.querySelector(".popup-error p").innerText =
       "Al parecer hubo un error con tus datos, por favor ingresalos correctamente.";
     document.querySelector(".popup-error").classList.add("show");
@@ -84,12 +75,6 @@ document.getElementById("resBtn").addEventListener("click", async (e) => {
 });
 
 document.getElementById("close").addEventListener("click", () => {
-  nom = "";
-  correo = "";
-  data.nombre = "";
-  data.ap = "";
-  data.email = "";
-
   document.querySelector(".popup").classList.remove("show");
   document.body.style.overflow = "visible";
 });
@@ -98,30 +83,6 @@ document.getElementById("close-error").addEventListener("click", () => {
   document.querySelector(".popup-error").classList.remove("show");
   document.body.style.overflow = "visible";
 });
-
-function checkName(name) {
-  if (name == "") {
-    return false;
-  } else if (!nombreRegex.test(name)) {
-    return false;
-  }
-  nom = capitlizeText(name);
-  data.nombre = getFistName(nom);
-  data.ap = getLastName(nom);
-  console.log(data.ap);
-  return true;
-}
-
-function checkEmail(email) {
-  if (email == "") {
-    return false;
-  } else if (!emailRegex.test(email)) {
-    return false;
-  }
-  correo = email;
-  data.email = correo;
-  return true;
-}
 
 function capitlizeText(str) {
   return str
@@ -138,18 +99,11 @@ function getFistName(name) {
   return nArray[0];
 }
 
-function getLastName(name) {
-  let nArray = name.split(/(\s+)/);
-  if (nArray[2] != "" || nArray[2] != " ") {
-    return nArray[2];
-  } else {
-    return null;
-  }
-}
-
-async function setInfoText() {
-  document.getElementById("name").innerText = data.nombre;
-  document.getElementById("email").innerText = correo;
+async function setInfoText(data) {
+  document.getElementById("name").innerText = getFistName(
+    capitlizeText(data.name)
+  );
+  document.getElementById("email").innerText = data.email;
 
   let respuestaJson = null;
   const res = await fetch("/api/setSuscripcion", {
@@ -161,7 +115,8 @@ async function setInfoText() {
   });
   respuestaJson = await res.json();
   respuestaJson = respuestaJson[0];
-  return respuestaJson;
+  console.log(respuestaJson);
+  return respuestaJson.res;
 }
 
 getProducts();
