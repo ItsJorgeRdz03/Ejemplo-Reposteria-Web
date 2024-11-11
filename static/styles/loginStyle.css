@@ -60,12 +60,15 @@ h1 {
 }
 
 .toggle-buttons a:hover {
-  background-color: white;
-  background-image: linear-gradient(
-    white,
-    #dbd3d3
-  ); /* Color más oscuro para hover */
+  background-color: #fdefef;
   color: #e0656f;
+  border-color: #e0656f;
+  border-style: none none solid none;
+}
+
+.toggle-buttons a:focus {
+  background-color: white;
+  color: #808080;
   border-color: #e0656f;
   border-style: none none solid none;
 }
