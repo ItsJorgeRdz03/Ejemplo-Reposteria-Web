@@ -2,6 +2,7 @@ import express, { text } from "express";
 import path from "path";
 import { servidor, __dirname } from "./data.js";
 import { getBestProd, getBestProdInfo, setSuscripcion } from "./database.js";
+import * as check from "./checkData.js";
 
 const app = express();
 
@@ -58,11 +59,58 @@ app.get("/api/bestProductsInfo", async (req, res) => {
 });
 
 app.post("/api/setSuscripcion", async (req, res) => {
+  console.log(req.body);
   try {
-    //console.log(req.body);
-    const data = await setSuscripcion(req.body);
-    console.log(data);
-    res.json(data);
+    let err = [{ res: 2 }];
+    let values = {
+      nombre: "",
+      ap: "",
+      email: "",
+    };
+    let nom = check.checkName(req.body.name) == true ? req.body.name : "";
+    if (nom != "") {
+      nom = check.capitlizeText(nom);
+      values.nombre = check.getFistName(nom);
+      values.ap = check.getLastName(nom);
+      values.email =
+        check.checkEmail(req.body.email) == true ? req.body.email : "";
+    } else {
+      res.json(err);
+      return;
+    }
+
+    if (values.nombre != "" && values.ap != "" && values.email != "") {
+      console.log(values);
+      const data = await setSuscripcion(values);
+      console.log(data);
+      res.json(data);
+    } else {
+      res.json(err);
+    }
+  } catch (err) {
+    console.error(messageError, err);
+    res.status(500).send(messageError);
+  }
+});
+
+app.post("/api/setUsuario", async (req, res) => {
+  try {
+    console.log(req.body);
+    //const data = await setSuscripcion(req.body);
+    //console.log(data);
+    //res.json(data);
+  } catch (err) {
+    console.error(messageError, err);
+    res.status(500).send(messageError);
+  }
+});
+
+app.post("/api/setLogin", async (req, res) => {
+  try {
+    console.log(req.body);
+    //const data = await setSuscripcion(req.body);
+    //console.log(data);
+    //res.json(data);
   } catch (err) {
     console.error(messageError, err);
     res.status(500).send(messageError);
