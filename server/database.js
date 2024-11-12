@@ -59,10 +59,10 @@ export async function setSuscripcion(data) {
   }
 }
 
-export async function setuSuario(data) {
+export async function setUsuario(data) {
   try {
     console.log("Consulta iniciada");
-    let query = `SELECT setUsuario("${data.nombre}", "${data.ap}", "${data.am}, "${data.tel}, "${data.gen}, "${data.fecha}, "${data.email}, "${data.pass}") as res;`;
+    let query = `SELECT setUsuario("${data.nombre}", "${data.ap}", "${data.am}", "${data.tel}", "${data.gen}", "${data.fecha}", "${data.email}", "${data.pass}") as res;`;
     const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
     endConnection();
     return rows; // Retornamos las filas afectadas

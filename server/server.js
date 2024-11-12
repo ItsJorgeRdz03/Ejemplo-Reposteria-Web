@@ -7,6 +7,7 @@ import {
   getBestProdInfo,
   getLogin,
   setSuscripcion,
+  setUsuario,
 } from "./database.js";
 import * as check from "./checkData.js";
 
@@ -112,12 +113,14 @@ app.post("/api/setUsuario", async (req, res) => {
     if (!check.checkGen(req.body.gen)) checked = false;
     if (!check.checkDate(req.body.fecha)) checked = false;
     if (!check.checkPass(req.body.pass)) checked = false;
+    console.log(req.body.fecha);
+    console.log(checked);
     if (checked) {
       await bcrypt.hash(body.pass, 10, async function (err, hash) {
         body.pass = hash;
         console.log(body);
-        console.log(0);
-        const data = await setSuscripcion(body);
+        const data = await setUsuario(body);
+        console.log(data);
         res.json(data);
       });
     } else {
