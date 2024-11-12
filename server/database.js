@@ -59,6 +59,30 @@ export async function setSuscripcion(data) {
   }
 }
 
+export async function setuSuario(data) {
+  try {
+    console.log("Consulta iniciada");
+    let query = `SELECT setUsuario("${data.nombre}", "${data.ap}", "${data.am}, "${data.tel}, "${data.gen}, "${data.fecha}, "${data.email}, "${data.pass}") as res;`;
+    const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
+    endConnection();
+    return rows; // Retornamos las filas afectadas
+  } catch (err) {
+    console.error(messageError, err);
+  }
+}
+
+export async function getLogin(data) {
+  try {
+    console.log("Consulta iniciada");
+    let query = `CALL getPassword("${data}");`;
+    const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
+    endConnection();
+    return rows; // Retornamos las filas afectadas
+  } catch (err) {
+    console.error(messageError, err);
+  }
+}
+
 export async function test() {
   try {
     console.log("Consulta iniciada");

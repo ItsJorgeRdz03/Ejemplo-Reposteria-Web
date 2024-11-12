@@ -1,7 +1,13 @@
 import express, { text } from "express";
+import bcrypt from "bcrypt";
 import path from "path";
 import { servidor, __dirname } from "./data.js";
-import { getBestProd, getBestProdInfo, setSuscripcion } from "./database.js";
+import {
+  getBestProd,
+  getBestProdInfo,
+  getLogin,
+  setSuscripcion,
+} from "./database.js";
 import * as check from "./checkData.js";
 
 const app = express();
@@ -95,8 +101,29 @@ app.post("/api/setSuscripcion", async (req, res) => {
 
 app.post("/api/setUsuario", async (req, res) => {
   try {
-    console.log(req.body);
-    //const data = await setSuscripcion(req.body);
+    let err = [{ res: 2 }];
+    let body = req.body;
+    let checked = true;
+    if (!check.checkEmail(req.body.email)) checked = false;
+    if (!check.checkName(req.body.nombre)) checked = false;
+    if (!check.checkNomComp(req.body.ap)) checked = false;
+    if (!check.checkNomComp(req.body.am)) checked = false;
+    if (!check.checkTel(req.body.tel)) checked = false;
+    if (!check.checkGen(req.body.gen)) checked = false;
+    if (!check.checkDate(req.body.fecha)) checked = false;
+    if (!check.checkPass(req.body.pass)) checked = false;
+    if (checked) {
+      await bcrypt.hash(body.pass, 10, async function (err, hash) {
+        body.pass = hash;
+        console.log(body);
+        console.log(0);
+        const data = await setSuscripcion(body);
+        res.json(data);
+      });
+    } else {
+      console.log(1);
+      res.json(err);
+    }
     //console.log(data);
     //res.json(data);
   } catch (err) {
@@ -107,8 +134,24 @@ app.post("/api/setUsuario", async (req, res) => {
 
 app.post("/api/setLogin", async (req, res) => {
   try {
-    console.log(req.body);
-    //const data = await setSuscripcion(req.body);
+    let err = [{ res: 2 }];
+    let checked = true;
+    if (!check.checkEmail(req.body.email)) checked = false;
+    if (!check.checkPass(req.body.pass)) checked = false;
+    if (checked) {
+      const data = await getLogin(req.body.email);
+      console.log(data);
+      let result;
+      try {
+        result = await bcrypt.compare(req.body.pass, data[0].pswd);
+      } catch (error) {
+        result == false;
+      }
+      err[0].res = result == true ? 1 : 0;
+      res.json(err);
+    } else {
+      res.json(err);
+    }
     //console.log(data);
     //res.json(data);
   } catch (err) {
