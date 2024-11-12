@@ -146,7 +146,7 @@ app.post("/api/setLogin", async (req, res) => {
       console.log(data);
       let result;
       try {
-        result = await bcrypt.compare(req.body.pass, data[0].pswd);
+        result = await bcrypt.compare(req.body.pass, data[0][0].pswd);
       } catch (error) {
         result == false;
       }
