@@ -19,6 +19,7 @@
           Registrarse
         </a>
       </div>
+      <div class="error-m"><p></p></div>
 
       <!-- Formulario compartido para Login y Registro -->
       <form id="form">
@@ -112,9 +113,24 @@
           />
         </div>
         <div class="data-group">
-          <button id="sendBtn">Iniciar Sesión</button>
+          <button id="sendBtn"></button>
         </div>
       </form>
+    </div>
+    <div class="popup">
+      <div class="popup-bg">
+        <div class="popup-box">
+          <div class="popup-img">
+            <img src="/img/checked.svg" alt="Imagen verificacion" />
+          </div>
+          <p class="gracias">¡Completado!</p>
+          <p class="texto">¡Tu cuenta ha sido registrada con exito!</p>
+          <p class="p-mess">
+            Inicia sesión desde la pagina de inicio para acceder a tu cuenta.
+          </p>
+          <button id="close">Entendido</button>
+        </div>
+      </div>
     </div>
     <script src="/script/loginScript.js"></script>
   </body>
