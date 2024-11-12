@@ -1,8 +1,3 @@
-const nombreRegex = new RegExp(
-  "^[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+(\\s+[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+)+$"
-);
-const emailRegex = new RegExp("^\\w+@[a-zA-Z_]+?(\\.[a-zA-Z]{2,3}){1,2}$");
-
 async function getProducts() {
   let respuestaJson = null;
   const res = await fetch("/api/bestProducts", {
