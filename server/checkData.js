@@ -5,6 +5,10 @@ const nombreComp = new RegExp("^[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+$");
 const emailRegex = new RegExp("^\\w+@[a-zA-Z_]+?(\\.[a-zA-Z]{2,3}){1,2}$");
 const tel = new RegExp("^\\d{10}$");
 const genero = new RegExp("(Hombre|Mujer|Otro)$");
+const pass = new RegExp("^.{8,}$");
+const date = new RegExp(
+  "^(0?[1-9]|[12][0-9]|3[01])[\\-](0?[1-9]|1[012])[\\-]\\d{4}$"
+);
 
 export function capitlizeText(str) {
   return str
@@ -70,6 +74,24 @@ export function checkGen(gen) {
   if (gen == "") {
     return false;
   } else if (!genero.test(gen)) {
+    return false;
+  }
+  return true;
+}
+
+export function checkDate(f) {
+  if (f == "") {
+    return false;
+  } else if (!date.test(f)) {
+    return false;
+  }
+  return true;
+}
+
+export function checkPass(pswd) {
+  if (pswd == "") {
+    return false;
+  } else if (!pass.test(pswd)) {
     return false;
   }
   return true;
