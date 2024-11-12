@@ -7,7 +7,7 @@ const tel = new RegExp("^\\d{10}$");
 const genero = new RegExp("(Hombre|Mujer|Otro)$");
 const pass = new RegExp("^.{8,}$");
 const date = new RegExp(
-  "^(0?[1-9]|[12][0-9]|3[01])[\\-](0?[1-9]|1[012])[\\-]\\d{4}$"
+  "^\\d{4}[\\-](0?[1-9]|1[012])[\\-](0?[1-9]|[12][0-9]|3[01])$"
 );
 
 export function capitlizeText(str) {
