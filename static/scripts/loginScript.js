@@ -42,11 +42,12 @@ sendBtn.addEventListener("click", async (e) => {
     console.log(respuestaJson);
     if (respuestaJson == 1) {
       errorM.innerText = "";
-      document.querySelector(".error-m").classList.remove("show");
+      document.querySelector(".error-m").style.display = "none";
       location.href = "/";
     } else {
       errorM.innerText = "Correo y/o contraseña incorrectos.";
-      document.querySelector(".error-m").classList.add("show");
+      document.querySelector(".error-m").style.display = "block";
+      console.log(errorM.innerText);
     }
   } else if (sendBtn.innerText == "Registrarse") {
     data = {
@@ -70,20 +71,16 @@ sendBtn.addEventListener("click", async (e) => {
     //respuestaJson = respuestaJson[0].res;
     console.log(respuestaJson);
     if (respuestaJson[0].res == 1) {
-      console.log(1);
       errorM.innerText = "";
-      errorM.style.display = "none";
-      document.querySelector(".error-m").classList.remove("show");
+      document.querySelector(".error-m").style.display = "none";
       document.querySelector(".popup").classList.add("show");
       document.body.style.overflow = "hidden";
     } else if (respuestaJson[0].res == 0) {
-      console.log(0);
       errorM.innerText = "Correo ya registrado. Por favor prueva con otro.";
-      document.querySelector(".error-m").classList.add("show");
+      document.querySelector(".error-m").style.display = "block";
     } else {
-      console.log(2);
       errorM.innerText = "Datos ingresados incorrectos.";
-      document.querySelector(".error-m").classList.add("show");
+      document.querySelector(".error-m").style.display = "block";
     }
   }
 });
