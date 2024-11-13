@@ -75,7 +75,27 @@ nav ul li a {
 
 nav ul li a:hover {
   text-decoration: none;
+  background-color: #ea454b;
   color: white;
+}
+
+.d-menu {
+  max-width: 170px;
+  right: 10px;
+}
+
+.guest {
+  display: none;
+}
+
+.user {
+  display: block;
+}
+
+.user svg {
+  fill: white;
+  position: relative;
+  top: 13px;
 }
 
 .repo {
