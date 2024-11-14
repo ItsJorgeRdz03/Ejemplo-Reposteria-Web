@@ -85,11 +85,11 @@ nav ul li a:hover {
 }
 
 .guest {
-  display: none;
+  display: block;
 }
 
 .user {
-  display: block;
+  display: none;
 }
 
 .user svg {
