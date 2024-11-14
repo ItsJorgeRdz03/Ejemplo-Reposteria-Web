@@ -1,7 +1,8 @@
 import express, { text } from "express";
 import bcrypt from "bcrypt";
 import path from "path";
-import { servidor, __dirname } from "./data.js";
+import jwt from "jsonwebtoken";
+import { servidor, secret, __dirname } from "./data.js";
 import {
   getBestProd,
   getBestProdInfo,
@@ -137,7 +138,7 @@ app.post("/api/setUsuario", async (req, res) => {
 
 app.post("/api/setLogin", async (req, res) => {
   try {
-    let err = [{ res: 2 }];
+    let response = [{ res: 2 }, { token: null }];
     let checked = true;
     if (!check.checkEmail(req.body.email)) checked = false;
     if (!check.checkPass(req.body.pass)) checked = false;
@@ -150,10 +151,23 @@ app.post("/api/setLogin", async (req, res) => {
       } catch (error) {
         result == false;
       }
-      err[0].res = result == true ? 1 : 0;
-      res.json(err);
+      if (result) {
+        response[0].res = 1;
+        response[1].token = jwt.sign(
+          {
+            id: data[0][0].pkIdUser,
+            nombre: data[0][0].nombre,
+          },
+          secret.JWT_SECRET,
+          { expiresIn: "1h" }
+        );
+      } else {
+        response[0].res = 0;
+      }
+      console.log(response);
+      res.json(response);
     } else {
-      res.json(err);
+      res.json(response);
     }
     //console.log(data);
     //res.json(data);
@@ -161,6 +175,18 @@ app.post("/api/setLogin", async (req, res) => {
     console.error(messageError, err);
     res.status(500).send(messageError);
   }
+});
+
+app.post("/api/verifyToken", async (req, res) => {
+  let data = [{ res: null }];
+  console.log(req.body);
+  try {
+    jwt.verify(req.body.token, secret.JWT_SECRET);
+    data[0].res = 1;
+  } catch (error) {
+    data[0].res = 0;
+  }
+  res.json(data);
 });
 
 app.post("/test", async (req, res) => {
@@ -171,12 +197,3 @@ app.post("/test", async (req, res) => {
 });
 
 const messageError = "Ha ocurrido un error al procesar tu peticion: ";
-
-/*app.post("/parser", async (req, res) => {
-  if (req.body.string === "") {
-    res.send("").end;
-  }
-  let data = await parser.analizar(req.body.string);
-  console.log(data);
-  res.send(data).end;
-});*/

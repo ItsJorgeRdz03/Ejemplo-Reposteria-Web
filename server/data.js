@@ -19,3 +19,8 @@ export const servidor = {
   SERVER_HOST: process.env.SERVER_HOST,
   SERVER_PORT: process.env.SERVER_PORT,
 };
+
+// SECRET
+export const secret = {
+  JWT_SECRET: process.env.JWT_SECRET,
+};

@@ -114,5 +114,38 @@ async function setInfoText(data) {
   return respuestaJson.res;
 }
 
+async function checkLogin() {
+  const res = await fetch("/api/verifyToken", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ token: localStorage.getItem("token") }),
+  });
+  let respuestaJson = await res.json();
+  if (respuestaJson[0].res == 1) {
+    document.querySelector(".guest").style.display = "none";
+    document.querySelector(".user").style.display = "block";
+  }
+}
+
+document.querySelector(".logout").addEventListener("click", async () => {
+  const res = await fetch("/api/verifyToken", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ token: localStorage.getItem("token") }),
+  });
+  let respuestaJson = await res.json();
+  if (respuestaJson[0].res == 1) {
+    localStorage.removeItem("token");
+    document.querySelector(".guest").style.display = "block";
+    document.querySelector(".user").style.display = "none";
+    location.href = "/";
+  }
+});
+
+checkLogin();
 getProducts();
 getProductsInfo();

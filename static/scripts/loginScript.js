@@ -38,8 +38,9 @@ sendBtn.addEventListener("click", async (e) => {
       body: JSON.stringify(data),
     });
     respuestaJson = await res.json();
-    respuestaJson = respuestaJson[0].res;
+    await localStorage.setItem("token", respuestaJson[1].token);
     console.log(respuestaJson);
+    respuestaJson = respuestaJson[0].res;
     if (respuestaJson == 1) {
       errorM.innerText = "";
       document.querySelector(".error-m").style.display = "none";
@@ -68,7 +69,6 @@ sendBtn.addEventListener("click", async (e) => {
       body: JSON.stringify(data),
     });
     respuestaJson = await res.json();
-    //respuestaJson = respuestaJson[0].res;
     console.log(respuestaJson);
     if (respuestaJson[0].res == 1) {
       errorM.innerText = "";
