@@ -2,6 +2,7 @@ import express, { text } from "express";
 import bcrypt from "bcrypt";
 import path from "path";
 import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
 import { servidor, secret, __dirname } from "./data.js";
 import {
   getBestProd,
@@ -20,6 +21,19 @@ app.listen(servidor.SERVER_PORT, () => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(async (req, res, next) => {
+  const token = req.cookies.access_token;
+  req.session = { id: null, name: null };
+  try {
+    const data = jwt.verify(token, secret.JWT_SECRET);
+    req.session.id = data.id;
+    req.session.name = data.nombre;
+  } catch (error) {
+    console.log(error);
+  }
+  next();
+});
 app.use("/img", express.static(path.join(__dirname, "../static/src/imgs")));
 app.use("/style", express.static(path.join(__dirname, "../static/styles")));
 app.use("/script", express.static(path.join(__dirname, "../static/scripts")));
@@ -29,11 +43,23 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/login", async (req, res) => {
-  res.sendFile(path.join(__dirname, "../static/pages/login.html"));
+  if (req.cookies.access_token) {
+    res.sendFile(path.join(__dirname, "../static/pages/estadoLogin.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "../static/pages/login.html"));
+  }
 });
 
 app.get("/reservar", async (req, res) => {
-  res.sendFile(path.join(__dirname, "../static/pages/productos.html"));
+  if (req.cookies.access_token) {
+    res.sendFile(path.join(__dirname, "../static/pages/productos.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "../static/pages/estadoLogin.html"));
+  }
+});
+
+app.get("/soon", async (req, res) => {
+  res.sendFile(path.join(__dirname, "../static/pages/construccion.html"));
 });
 
 app.get("/img", async (req, res) => {
@@ -47,7 +73,6 @@ app.get("/api/admin", async (req, res) => {
 app.get("/api/bestProducts", async (req, res) => {
   try {
     const data = await getBestProd();
-    //console.log(data);
     res.json(data);
   } catch (err) {
     console.error(messageError, err);
@@ -58,7 +83,6 @@ app.get("/api/bestProducts", async (req, res) => {
 app.get("/api/bestProductsInfo", async (req, res) => {
   try {
     const data = await getBestProdInfo();
-    //console.log(data);
     res.json(data);
   } catch (err) {
     console.error(messageError, err);
@@ -101,7 +125,7 @@ app.post("/api/setSuscripcion", async (req, res) => {
   }
 });
 
-app.post("/api/setUsuario", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   try {
     let err = [{ res: 2 }];
     let body = req.body;
@@ -128,15 +152,13 @@ app.post("/api/setUsuario", async (req, res) => {
       console.log(1);
       res.json(err);
     }
-    //console.log(data);
-    //res.json(data);
   } catch (err) {
     console.error(messageError, err);
     res.status(500).send(messageError);
   }
 });
 
-app.post("/api/setLogin", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   try {
     let response = [{ res: 2 }, { token: null }];
     let checked = true;
@@ -153,7 +175,7 @@ app.post("/api/setLogin", async (req, res) => {
       }
       if (result) {
         response[0].res = 1;
-        response[1].token = jwt.sign(
+        const token = jwt.sign(
           {
             id: data[0][0].pkIdUser,
             nombre: data[0][0].nombre,
@@ -161,11 +183,19 @@ app.post("/api/setLogin", async (req, res) => {
           secret.JWT_SECRET,
           { expiresIn: "1h" }
         );
+        console.log(response);
+        res
+          .cookie("access_token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict",
+          })
+          .json(response);
       } else {
+        console.log(response);
         response[0].res = 0;
+        res.json(response);
       }
-      console.log(response);
-      res.json(response);
     } else {
       res.json(response);
     }
@@ -177,15 +207,14 @@ app.post("/api/setLogin", async (req, res) => {
   }
 });
 
-app.post("/api/verifyToken", async (req, res) => {
-  let data = [{ res: null }];
-  console.log(req.body);
-  try {
-    jwt.verify(req.body.token, secret.JWT_SECRET);
-    data[0].res = 1;
-  } catch (error) {
-    data[0].res = 0;
-  }
+app.post("/api/logout", async (req, res) => {
+  res.clearCookie("access_token").json([{ res: 1 }]);
+});
+
+app.post("/api/isLogged", async (req, res) => {
+  const data = req.cookies.access_token
+    ? [{ res: 1, name: req.session.name }]
+    : [{ res: 0, name: "" }];
   res.json(data);
 });
 

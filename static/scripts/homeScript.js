@@ -115,33 +115,34 @@ async function setInfoText(data) {
 }
 
 async function checkLogin() {
-  const res = await fetch("/api/verifyToken", {
+  const res = await fetch("/api/isLogged", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ token: localStorage.getItem("token") }),
   });
   let respuestaJson = await res.json();
-  if (respuestaJson[0].res == 1) {
+  respuestaJson = respuestaJson[0];
+  if (respuestaJson.res == 1) {
     document.querySelector(".guest").style.display = "none";
     document.querySelector(".user").style.display = "block";
+    document.querySelector(".user-name").innerText = respuestaJson.name;
+  } else {
+    document.querySelector(".guest").style.display = "block";
+    document.querySelector(".user").style.display = "none";
   }
 }
 
 document.querySelector(".logout").addEventListener("click", async () => {
-  const res = await fetch("/api/verifyToken", {
+  const res = await fetch("/api/logout", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ token: localStorage.getItem("token") }),
   });
   let respuestaJson = await res.json();
   if (respuestaJson[0].res == 1) {
-    localStorage.removeItem("token");
-    document.querySelector(".guest").style.display = "block";
-    document.querySelector(".user").style.display = "none";
+    checkLogin();
     location.href = "/";
   }
 });
