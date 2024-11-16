@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import { servidor, secret, __dirname } from "./data.js";
 import {
+  getAllProd,
   getBestProd,
   getBestProdInfo,
   getLogin,
@@ -26,7 +27,7 @@ app.use(async (req, res, next) => {
   const token = req.cookies.access_token;
   req.session = { id: null, name: null };
   try {
-    const data = jwt.verify(token, secret.JWT_SECRET);
+    const data = jwt.verify(token, secret.JWT_SECRET); //Hay un error al parecer
     req.session.id = data.id;
     req.session.name = data.nombre;
   } catch (error) {
@@ -87,6 +88,21 @@ app.get("/api/bestProductsInfo", async (req, res) => {
   } catch (err) {
     console.error(messageError, err);
     res.status(500).send(messageError);
+  }
+});
+
+app.get("/api/allProducts", async (req, res) => {
+  if (req.cookies.access_token) {
+    try {
+      const data = await getAllProd();
+      console.log(data[0]);
+      res.json([{ res: 1, data: data[0] }]);
+    } catch (err) {
+      console.error(messageError, err);
+      res.status(500).send(messageError);
+    }
+  } else {
+    res.json([{ res: 0 }]);
   }
 });
 

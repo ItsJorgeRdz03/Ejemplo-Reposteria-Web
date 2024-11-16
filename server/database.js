@@ -23,6 +23,18 @@ async function endConnection() {
   }
 }
 
+export async function getAllProd() {
+  try {
+    console.log("Consulta iniciada");
+    let query = "CALL getAllProducts();";
+    const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
+    endConnection();
+    return rows; // Retornamos las filas afectadas
+  } catch (err) {
+    console.error(messageError, err);
+  }
+}
+
 export async function getBestProd() {
   try {
     console.log("Consulta iniciada");
