@@ -1,6 +1,3 @@
-//const tabs = document.querySelector(".toggle-buttons a");
-//const loginTab = document.getElementById("loginBtn");
-//const registerTab = document.getElementById("registerBtn");
 const errorM = document.querySelector(".error-m p");
 const sendBtn = document.getElementById("sendBtn");
 const nombre = document.getElementById("nombre");
@@ -30,7 +27,7 @@ sendBtn.addEventListener("click", async (e) => {
   let respuestaJson = null;
   if (sendBtn.innerText == "Iniciar Sesión") {
     data = { email: email.value, pass: pass.value };
-    const res = await fetch("/api/setLogin", {
+    const res = await fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +58,7 @@ sendBtn.addEventListener("click", async (e) => {
       email: email.value,
       pass: pass.value,
     };
-    const res = await fetch("/api/setUsuario", {
+    const res = await fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
