@@ -84,14 +84,6 @@ nav ul li a:hover {
   right: 10px;
 }
 
-.guest {
-  display: block;
-}
-
-.user {
-  display: none;
-}
-
 .user svg {
   fill: white;
   position: relative;

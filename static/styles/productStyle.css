@@ -1,34 +1,27 @@
-/* Estilo General */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #fff7f9;
-  color: #333;
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0;
-  padding: 0;
 }
 
-header {
+.head {
   text-align: center;
   margin: 2rem 0;
 }
 
-header h1 {
+.head h1 {
   color: #f87885;
   font-size: 2em;
   margin: 0.5em 0;
 }
 
-header p {
+.head p {
   font-size: 1.1em;
   color: #555;
   max-width: 600px;
   margin: 0 auto;
 }
 
-/* Grid de Productos */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -39,7 +32,6 @@ header p {
   box-sizing: border-box;
 }
 
-/* Tarjeta de Producto */
 .product-card {
   background-color: #ffffff;
   border-radius: 10px;
@@ -52,14 +44,12 @@ header p {
   transform: translateY(-5px);
 }
 
-/* Imagen del Producto */
 .product-img {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
 
-/* Información del Producto */
 .product-info {
   padding: 1.5em;
   text-align: center;
@@ -84,7 +74,6 @@ header p {
   margin-bottom: 1em;
 }
 
-/* Botón de Reservar */
 .reserve-btn {
   background-color: #f87885;
   color: white;
@@ -98,14 +87,4 @@ header p {
 
 .reserve-btn:hover {
   background-color: #e0656f;
-}
-
-/* Pie de página */
-footer {
-  text-align: center;
-  padding: 1em;
-  background-color: #fdf2f5;
-  width: 100%;
-  color: #555;
-  margin-top: 2em;
 }
