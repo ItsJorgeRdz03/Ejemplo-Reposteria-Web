@@ -30,9 +30,7 @@ app.use(async (req, res, next) => {
     const data = jwt.verify(token, secret.JWT_SECRET); //Hay un error al parecer
     req.session.id = data.id;
     req.session.name = data.nombre;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
   next();
 });
 app.use("/img", express.static(path.join(__dirname, "../static/src/imgs")));
@@ -54,6 +52,14 @@ app.get("/login", async (req, res) => {
 app.get("/reservar", async (req, res) => {
   if (req.cookies.access_token) {
     res.sendFile(path.join(__dirname, "../static/pages/productos.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "../static/pages/estadoLogin.html"));
+  }
+});
+
+app.get("/carrito", async (req, res) => {
+  if (req.cookies.access_token) {
+    res.sendFile(path.join(__dirname, "../static/pages/carrito.html"));
   } else {
     res.sendFile(path.join(__dirname, "../static/pages/estadoLogin.html"));
   }

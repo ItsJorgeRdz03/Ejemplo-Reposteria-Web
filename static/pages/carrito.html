@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrito de Reservas</title>
+    <link rel="stylesheet" href="/style/carritoStyle.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <a href="index.html"
+            ><img src="/img/logo.png" alt="Logo Pastelería"
+          /></a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="reservas.html" class="active">Carrito</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="login.html">Iniciar Sesión</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="carrito-reservas">
+        <h1>Carrito de Reservas</h1>
+        <div class="productos-lista">
+          <!-- Producto 1 -->
+          <div class="producto-item">
+            <img src="/img/prod1.webp" alt="Pastel de Chocolate" />
+            <div class="producto-info">
+              <h3>Pastel de Chocolate</h3>
+              <p>Precio Unitario: $450 MXN</p>
+              <div class="cantidad-control">
+                <button
+                  class="btn-cantidad"
+                  onclick="modificarCantidad(this, -1)"
+                >
+                  -
+                </button>
+                <span class="cantidad">1</span>
+                <button
+                  class="btn-cantidad"
+                  onclick="modificarCantidad(this, 1)"
+                >
+                  +
+                </button>
+              </div>
+              <p>Total: $<span class="total">450</span> MXN</p>
+            </div>
+            <button class="btn-eliminar" onclick="eliminarProducto(this)">
+              Eliminar
+            </button>
+          </div>
+
+          <!-- Producto 2 -->
+          <div class="producto-item">
+            <img src="/img/prod2.webp" alt="Empanadas de Manzana" />
+            <div class="producto-info">
+              <h3>Empanadas de Manzana</h3>
+              <p>Precio Unitario: $80 MXN</p>
+              <div class="cantidad-control">
+                <button
+                  class="btn-cantidad"
+                  onclick="modificarCantidad(this, -1)"
+                >
+                  -
+                </button>
+                <span class="cantidad">1</span>
+                <button
+                  class="btn-cantidad"
+                  onclick="modificarCantidad(this, 1)"
+                >
+                  +
+                </button>
+              </div>
+              <p>Total: $<span class="total">80</span> MXN</p>
+            </div>
+            <button class="btn-eliminar" onclick="eliminarProducto(this)">
+              Eliminar
+            </button>
+          </div>
+        </div>
+
+        <div class="resumen">
+          <h2>Resumen de la Reserva</h2>
+          <p>Total a pagar: $<span id="total-reserva">530</span> MXN</p>
+          <button class="btn-confirmar">Confirmar Reserva</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2024 Pastelería Artesanal. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="/scripts/carrito.js"></script>
+  </body>
+</html>
