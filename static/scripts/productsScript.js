@@ -29,15 +29,34 @@ async function getData() {
     for (let i = 0; i < respuestaJson.data.length; i++) {
       card.querySelector("img").src = respuestaJson.data[i].img;
       card.querySelector("h2").innerText = respuestaJson.data[i].nombre;
+      card.querySelector(".id").innerText = respuestaJson.data[i].pkIdProd;
       card.querySelector(".product-description").innerText =
         respuestaJson.data[i].descr;
+      card.querySelector(".stock").innerText =
+        "Disponible: " + respuestaJson.data[i].cantidad;
       card.querySelector(".product-price").innerText =
         "$" + respuestaJson.data[i].precio + " MXN";
       cont.innerHTML += card.innerHTML;
     }
     document.querySelectorAll(".product-card").forEach((card) => {
       card.querySelector(".reserve-btn").addEventListener("click", () => {
-        console.log(card.querySelector("h2").innerText);
+        //Almacenar datos en localStorage
+        let id = card.querySelector(".id").innerText;
+        let array = localStorage.getItem("index");
+        if (array.match(`${id}`) == null) {
+          let indexData =
+            localStorage.getItem("index") == ""
+              ? id
+              : localStorage.getItem("index") + " " + id;
+          let data = {
+            img: respuestaJson.data[Number.parseInt(id)].img,
+            nombre: respuestaJson.data[Number.parseInt(id)].nombre,
+            precio: respuestaJson.data[Number.parseInt(id)].precio,
+          };
+          localStorage.setItem("index", indexData);
+          localStorage.setItem(id, JSON.stringify(data));
+        }
+        location.href = "/carrito";
       });
     });
   } else {
@@ -63,3 +82,6 @@ document.querySelector(".logout").addEventListener("click", async () => {
     location.href = "/";
   }
 });
+
+let array = "";
+console.log(array.match("1"));
