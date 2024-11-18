@@ -13,12 +13,14 @@ function showRegister() {
   document.getElementById("form-title").innerText = "Registrarse";
   document.getElementById("registerFields").style.display = "block";
   document.getElementById("sendBtn").innerText = "Registrarse";
+  document.querySelector(".error-m").style.display = "none";
 }
 
 function showLogin() {
   document.getElementById("form-title").innerText = "Iniciar Sesión";
   document.getElementById("registerFields").style.display = "none";
   document.getElementById("sendBtn").innerText = "Iniciar Sesión";
+  document.querySelector(".error-m").style.display = "none";
 }
 
 sendBtn.addEventListener("click", async (e) => {
@@ -41,6 +43,7 @@ sendBtn.addEventListener("click", async (e) => {
     if (respuestaJson == 1) {
       errorM.innerText = "";
       document.querySelector(".error-m").style.display = "none";
+      localStorage.setItem("index", "");
       location.href = "/";
     } else {
       errorM.innerText = "Correo y/o contraseña incorrectos.";
