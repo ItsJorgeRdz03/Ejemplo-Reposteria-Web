@@ -3,9 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carrito de Reservas</title>
+    <title>Carrito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="/style/carritoStyle.css" />
-    <link rel="stylesheet" href="/style/HomeStyle.css" />
+    <link rel="stylesheet" href="/style/mainStyle.css" />
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/dev/metro.css" />
     <link
       rel="stylesheet"
@@ -62,7 +64,6 @@
         </nav>
       </div>
     </header>
-
     <main>
       <section class="carrito-reservas">
         <h1>Carrito de Reservas</h1>
@@ -72,27 +73,15 @@
             <img src="/img/prod1.webp" alt="Pastel de Chocolate" />
             <div class="producto-info">
               <h3>Pastel de Chocolate</h3>
-              <p>Precio Unitario: $450 MXN</p>
+              <p>Precio Unitario: $<span class="precio">450</span> MXN</p>
               <div class="cantidad-control">
-                <button
-                  class="btn-cantidad"
-                  onclick="modificarCantidad(this, -1)"
-                >
-                  -
-                </button>
+                <button class="btn-cantidad">-</button>
                 <span class="cantidad">1</span>
-                <button
-                  class="btn-cantidad"
-                  onclick="modificarCantidad(this, 1)"
-                >
-                  +
-                </button>
+                <button class="btn-cantidad">+</button>
               </div>
               <p>Total: $<span class="total">450</span> MXN</p>
             </div>
-            <button class="btn-eliminar" onclick="eliminarProducto(this)">
-              Eliminar
-            </button>
+            <button class="btn-eliminar">Eliminar</button>
           </div>
 
           <!-- Producto 2 -->
@@ -100,27 +89,15 @@
             <img src="/img/prod2.webp" alt="Empanadas de Manzana" />
             <div class="producto-info">
               <h3>Empanadas de Manzana</h3>
-              <p>Precio Unitario: $80 MXN</p>
+              <p>Precio Unitario: $<span class="precio">80</span> MXN</p>
               <div class="cantidad-control">
-                <button
-                  class="btn-cantidad"
-                  onclick="modificarCantidad(this, -1)"
-                >
-                  -
-                </button>
+                <button class="btn-cantidad">-</button>
                 <span class="cantidad">1</span>
-                <button
-                  class="btn-cantidad"
-                  onclick="modificarCantidad(this, 1)"
-                >
-                  +
-                </button>
+                <button class="btn-cantidad">+</button>
               </div>
               <p>Total: $<span class="total">80</span> MXN</p>
             </div>
-            <button class="btn-eliminar" onclick="eliminarProducto(this)">
-              Eliminar
-            </button>
+            <button class="btn-eliminar">Eliminar</button>
           </div>
         </div>
 
@@ -131,7 +108,6 @@
         </div>
       </section>
     </main>
-
     <footer>
       <div class="footer-content">
         <p>Contacto: info@dulcetentacion.com | Teléfono: +52 686 456 7890</p>
@@ -209,7 +185,8 @@
         </div>
       </div>
     </footer>
-
-    <script src="/script/carritoScript.js"></script>
+    <script src="https://cdn.metroui.org.ua/dev/metro.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="script/carritoScript.js"></script>
   </body>
 </html>
