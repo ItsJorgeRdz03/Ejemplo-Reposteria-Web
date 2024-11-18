@@ -34,11 +34,11 @@ async function getData() {
         respuestaJson.data[i].descr;
       card.querySelector(".stock").innerText =
         "Disponible: " + respuestaJson.data[i].cantidad;
-      card.querySelector(".product-price").innerText =
-        "$" + respuestaJson.data[i].precio + " MXN";
+      card.querySelector(".price").innerText = respuestaJson.data[i].precio;
       cont.innerHTML += card.innerHTML;
     }
     document.querySelectorAll(".product-card").forEach((card) => {
+      console.log(card.querySelector(".id").innerText);
       card.querySelector(".reserve-btn").addEventListener("click", () => {
         //Almacenar datos en localStorage
         let id = card.querySelector(".id").innerText;
@@ -48,10 +48,11 @@ async function getData() {
             localStorage.getItem("index") == ""
               ? id
               : localStorage.getItem("index") + " " + id;
+          console.log(respuestaJson.data[Number.parseInt(id)]);
           let data = {
-            img: respuestaJson.data[Number.parseInt(id)].img,
-            nombre: respuestaJson.data[Number.parseInt(id)].nombre,
-            precio: respuestaJson.data[Number.parseInt(id)].precio,
+            img: card.querySelector("img").src,
+            nombre: card.querySelector("h2").innerText,
+            precio: card.querySelector(".price").innerText,
           };
           localStorage.setItem("index", indexData);
           localStorage.setItem(id, JSON.stringify(data));
