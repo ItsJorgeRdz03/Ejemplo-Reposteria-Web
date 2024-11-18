@@ -1,5 +1,5 @@
 const nombreRegex = new RegExp(
-  "^[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+(\\s+[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+)+$"
+  "^[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+(\\s+[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+)?$"
 );
 const nombreComp = new RegExp("^[A-Za-zÁÉÍÓÚáéíóúÑñÜü]+$");
 const emailRegex = new RegExp("^\\w+@[a-zA-Z_]+?(\\.[a-zA-Z]{2,3}){1,2}$");
