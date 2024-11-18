@@ -7,6 +7,7 @@
 .carrito-reservas {
   padding: 20px;
   max-width: 900px;
+  min-height: 691px;
   margin: 0 auto;
 }
 
@@ -70,6 +71,8 @@
   background-color: #e0656f;
   color: #fff;
   border: none;
+  text-align: center;
+  width: 2em;
   padding: 5px 10px;
   font-size: 16px;
   cursor: pointer;
@@ -104,18 +107,15 @@
 /* Resumen */
 .resumen {
   margin-top: 30px;
-  text-align: center;
+  text-align: right;
   padding: 20px;
-  background-color: #fff;
-  border: 1px solid #f1f1f1;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .resumen h2 {
   font-size: 2rem;
   margin-bottom: 10px;
   color: #333;
+  border: 1;
 }
 
 .resumen p {
