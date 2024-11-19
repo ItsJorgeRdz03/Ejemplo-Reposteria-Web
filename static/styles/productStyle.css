@@ -22,12 +22,15 @@
   margin: 0 auto;
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2em;
+.container {
   max-width: 1200px;
   min-height: 559px;
+}
+
+.product-grid {
+  display: none;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2em;
   width: 100%;
   padding: 2rem;
   box-sizing: border-box;
@@ -65,6 +68,16 @@
 
 .id {
   display: none;
+}
+
+.empty {
+  display: block;
+  margin: 20% 0;
+}
+
+.empty p {
+  text-align: center;
+  font-weight: bold;
 }
 
 .product-description {

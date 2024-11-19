@@ -60,10 +60,8 @@ async function getData() {
         location.href = "/carrito";
       });
     });
-  } else {
-    document.querySelector("main").innerHTML = "";
-    document.querySelector("main").innerText = "No hay productos disponibles";
-    document.querySelector("main").style.fontWeight = "bold";
+    document.querySelector(".product-grid").style.display = "grid";
+    document.querySelector(".empty").style.display = "none";
   }
 }
 
