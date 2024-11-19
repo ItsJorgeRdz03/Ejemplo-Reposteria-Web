@@ -13,37 +13,57 @@ async function checkLogin() {
   }
 }
 
-let index = localStorage.getItem("index");
-for (let i = 0; i < index.length; i++) {
-  if (!index.charAt(i).match(" ")) {
-    console.log(index.charAt(i));
-    console.log(localStorage.getItem(`${index.charAt(i)}`));
+function renderItems() {
+  let index = localStorage.getItem("index");
+  const item = document.querySelector(".item-box");
+  const cont = document.querySelector(".productos-lista");
+  cont.innerHTML = "";
+  if (index.length > 0) {
+    document.querySelector(".carrito-reservas").style.display = "block";
+    document.querySelector(".empty").style.display = "none";
+    for (let i = 0; i < index.length; i++) {
+      if (!index.charAt(i).match(" ")) {
+        let data = JSON.parse(localStorage.getItem(`${index.charAt(i)}`));
+        item.querySelector("img").src = data.img;
+        item.querySelector("h3").innerText = data.nombre;
+        item.querySelector(".precio").innerText = data.precio;
+        item.querySelector(".total").innerText =
+          Number.parseFloat(data.precio) *
+          Number.parseInt(item.querySelector(".cantidad").innerText);
+        item.querySelector(".id").innerText = index.charAt(i);
+        cont.innerHTML += item.innerHTML;
+      }
+    }
   }
+  updateBtns();
 }
 
-document.querySelectorAll(".producto-item").forEach((item) => {
-  item.querySelector(".btn-eliminar").addEventListener("click", () => {
-    item.remove();
-  });
-  item.querySelectorAll(".btn-cantidad").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      let count = Number.parseInt(item.querySelector(".cantidad").innerText);
-      let precio = Number.parseFloat(item.querySelector(".precio").innerText);
-      if (btn.innerText == "-") {
-        if (count > 1) {
-          count--;
+function updateBtns() {
+  document.querySelectorAll(".producto-item").forEach((item) => {
+    item.querySelector(".btn-eliminar").addEventListener("click", () => {
+      removeItem(item.querySelector(".id").innerText);
+      item.remove();
+    });
+    item.querySelectorAll(".btn-cantidad").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        let count = Number.parseInt(item.querySelector(".cantidad").innerText);
+        let precio = Number.parseFloat(item.querySelector(".precio").innerText);
+        if (btn.innerText == "-") {
+          if (count > 1) {
+            count--;
+            item.querySelector(".cantidad").innerText = count;
+          }
+        } else if (btn.innerText == "+") {
+          count++;
           item.querySelector(".cantidad").innerText = count;
         }
-      } else if (btn.innerText == "+") {
-        count++;
-        item.querySelector(".cantidad").innerText = count;
-      }
-      let total = precio * count;
-      item.querySelector(".total").innerText = total;
-      updateTotal();
+        let total = precio * count;
+        item.querySelector(".total").innerText = total;
+        updateTotal();
+      });
     });
   });
-});
+}
 
 function updateTotal() {
   let precioFinal = 0;
@@ -54,7 +74,22 @@ function updateTotal() {
   document.getElementById("total-reserva").innerText = precioFinal;
 }
 
+function removeItem(id) {
+  let index = localStorage.getItem("index");
+  const res = index
+    .split(" ")
+    .filter((num) => num !== id)
+    .join(" ");
+  localStorage.setItem("index", res);
+  localStorage.removeItem(id);
+  if (res.length == 0) {
+    document.querySelector(".carrito-reservas").style.display = "none";
+    document.querySelector(".empty").style.display = "block";
+  }
+}
+
 checkLogin();
+renderItems();
 updateTotal();
 //document.querySelector(".user-name").innerText = respuestaJson.name;
 //localStorage.setItem("index", "");
