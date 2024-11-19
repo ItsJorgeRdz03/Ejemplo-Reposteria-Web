@@ -88,6 +88,20 @@ function removeItem(id) {
   }
 }
 
+document.querySelector(".logout").addEventListener("click", async () => {
+  const res = await fetch("/api/logout", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  let respuestaJson = await res.json();
+  if (respuestaJson[0].res == 1) {
+    checkLogin();
+    location.href = "/";
+  }
+});
+
 checkLogin();
 renderItems();
 updateTotal();
