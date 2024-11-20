@@ -149,27 +149,27 @@ app.post("/api/setSuscripcion", async (req, res) => {
 });
 
 app.post("/api/setReservacion", async (req, res) => {
-  console.log(req.body);
   if (req.cookies.access_token) {
     try {
-      let err = [{ res: 2 }];
-      let values = {
-        idUser: "",
-        pedidos: [],
-        fecha: "",
-        hora: "",
-      };
+      let err = [{ res: 2, ticket: "" }];
       let date = check.checkDate(req.body.fecha) == true ? req.body.fecha : "";
       let time = check.checkTime(req.body.hora) == true ? req.body.hora : "";
       if (date != "" && time != "") {
-        values.idUser = req.session.id;
-        values.fecha = date;
-        values.hora = time;
-        values.pedidos = req.body.pedidos;
+        let values = {
+          idUser: req.session.id,
+          pedidos: req.body.pedidos,
+          fecha: date,
+          hora: time,
+        };
         console.log(values);
         const data = await setReservacion(values);
-        console.log(data);
-        //res.json(data);
+        //console.log(data);
+        err[0].ticket = data[0].ticket;
+        if (!err[0].ticket == undefined) {
+          err[0].res = 1;
+        }
+        console.log(err);
+        res.json(err);
       } else {
         res.json(err);
         return;
@@ -289,12 +289,12 @@ async function test() {
   let values = {
     idUser: 1,
     pedidos: [
-      { id: "3", cantidad: "1" },
-      { id: "6", cantidad: "1" },
       { id: "2", cantidad: "1" },
+      { id: "9", cantidad: "1" },
+      { id: "6", cantidad: "1" },
     ],
-    fecha: "2024-11-21",
-    hora: "18:47",
+    fecha: "2024-11-26",
+    hora: "19:00",
   };
   console.log(values);
   const data = await setReservacion(values);
