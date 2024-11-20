@@ -105,14 +105,24 @@ document.querySelector(".btn-confirmar").addEventListener("click", async () => {
   const pedidos = Object.values(data.pedidos);
   data.pedidos = pedidos;
   console.log(data);
-  /*const res = await fetch("/api/setReservacion", {
+  const res = await fetch("/api/setReservacion", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
-  let respuestaJson = await res.json();*/
+  let respuestaJson = await res.json();
+  if (respuestaJson[0].res == 1) {
+    document.querySelector(".ticket").innerText = respuestaJson[0].ticket;
+    document.querySelector(".fecha-r").innerText = data.fecha;
+    document.querySelector(".hora-r").innerText = data.hora;
+    document.querySelector(".popup").classList.add("show");
+    document.body.style.overflow = "hidden";
+  } else {
+    document.querySelector(".popup-error").classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
 });
 
 document.querySelector(".logout").addEventListener("click", async () => {
@@ -127,6 +137,17 @@ document.querySelector(".logout").addEventListener("click", async () => {
     checkLogin();
     location.href = "/";
   }
+});
+
+document.getElementById("close").addEventListener("click", () => {
+  document.querySelector(".popup").classList.remove("show");
+  document.body.style.overflow = "visible";
+  location.href = "/reservar";
+});
+
+document.getElementById("close-error").addEventListener("click", () => {
+  document.querySelector(".popup-error").classList.remove("show");
+  document.body.style.overflow = "visible";
 });
 
 checkLogin();
