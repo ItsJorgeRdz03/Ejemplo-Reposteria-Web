@@ -9,6 +9,7 @@ import {
   getBestProd,
   getBestProdInfo,
   getLogin,
+  setReservacion,
   setSuscripcion,
   setUsuario,
 } from "./database.js";
@@ -147,6 +148,41 @@ app.post("/api/setSuscripcion", async (req, res) => {
   }
 });
 
+app.post("/api/setReservacion", async (req, res) => {
+  console.log(req.body);
+  if (req.cookies.access_token) {
+    try {
+      let err = [{ res: 2 }];
+      let values = {
+        idUser: "",
+        pedidos: [],
+        fecha: "",
+        hora: "",
+      };
+      let date = check.checkDate(req.body.fecha) == true ? req.body.fecha : "";
+      let time = check.checkTime(req.body.hora) == true ? req.body.hora : "";
+      if (date != "" && time != "") {
+        values.idUser = req.session.id;
+        values.fecha = date;
+        values.hora = time;
+        values.pedidos = req.body.pedidos;
+        console.log(values);
+        const data = await setReservacion(values);
+        console.log(data);
+        //res.json(data);
+      } else {
+        res.json(err);
+        return;
+      }
+    } catch (err) {
+      console.error(messageError, err);
+      res.status(500).send(messageError);
+    }
+  } else {
+    res.json([{ res: 0 }]);
+  }
+});
+
 app.post("/api/register", async (req, res) => {
   try {
     let err = [{ res: 2 }];
@@ -248,3 +284,20 @@ app.post("/test", async (req, res) => {
 });
 
 const messageError = "Ha ocurrido un error al procesar tu peticion: ";
+
+async function test() {
+  let values = {
+    idUser: 1,
+    pedidos: [
+      { id: "3", cantidad: "1" },
+      { id: "6", cantidad: "1" },
+      { id: "2", cantidad: "1" },
+    ],
+    fecha: "2024-11-21",
+    hora: "18:47",
+  };
+  console.log(values);
+  const data = await setReservacion(values);
+  console.log(data);
+}
+test();

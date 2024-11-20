@@ -88,6 +88,33 @@ function removeItem(id) {
   }
 }
 
+document.querySelector(".btn-confirmar").addEventListener("click", async () => {
+  let count = 0;
+  let data = {
+    pedidos: [],
+    fecha: document.getElementById("fecha").value,
+    hora: document.getElementById("hora").value,
+  };
+  document.querySelectorAll(".producto-item").forEach((item) => {
+    data.pedidos[count] = {
+      id: item.querySelector(".id").innerText,
+      cantidad: item.querySelector(".cantidad").innerText,
+    };
+    count++;
+  });
+  const pedidos = Object.values(data.pedidos);
+  data.pedidos = pedidos;
+  console.log(data);
+  /*const res = await fetch("/api/setReservacion", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  let respuestaJson = await res.json();*/
+});
+
 document.querySelector(".logout").addEventListener("click", async () => {
   const res = await fetch("/api/logout", {
     method: "POST",

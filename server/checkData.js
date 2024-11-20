@@ -9,6 +9,7 @@ const pass = new RegExp("^.{8,}$");
 const date = new RegExp(
   "^\\d{4}[\\-](0?[1-9]|1[012])[\\-](0?[1-9]|[12][0-9]|3[01])$"
 );
+const time = new RegExp("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$");
 
 export function capitlizeText(str) {
   return str
@@ -83,6 +84,15 @@ export function checkDate(f) {
   if (f == "") {
     return false;
   } else if (!date.test(f)) {
+    return false;
+  }
+  return true;
+}
+
+export function checkTime(t) {
+  if (t == "") {
+    return false;
+  } else if (!time.test(t)) {
     return false;
   }
   return true;

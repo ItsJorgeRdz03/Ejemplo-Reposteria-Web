@@ -83,6 +83,21 @@ export async function setUsuario(data) {
   }
 }
 
+export async function setReservacion(data) {
+  try {
+    console.log("Consulta iniciada");
+    console.log(data.pedidos);
+    let query = `CALL setReservaciones('${JSON.stringify(data.pedidos)}', "${
+      data.fecha
+    }", "${data.hora}", ${data.idUser});`;
+    const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
+    endConnection();
+    return rows; // Retornamos las filas afectadas
+  } catch (err) {
+    console.error(messageError, err);
+  }
+}
+
 export async function getLogin(data) {
   try {
     console.log("Consulta iniciada");
