@@ -239,6 +239,10 @@ footer {
   text-decoration: none;
 }
 
+.popup span {
+  font-weight: bold;
+}
+
 .p-mess {
   margin: 25px 0 15px 0;
 }

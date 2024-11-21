@@ -110,6 +110,18 @@ export async function getLogin(data) {
   }
 }
 
+export async function getTicket(data) {
+  try {
+    console.log("Consulta iniciada");
+    let query = `CALL getTicket(${data.id});`;
+    const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
+    endConnection();
+    return rows; // Retornamos las filas afectadas
+  } catch (err) {
+    console.error(messageError, err);
+  }
+}
+
 export async function test() {
   try {
     console.log("Consulta iniciada");

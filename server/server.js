@@ -9,6 +9,7 @@ import {
   getBestProd,
   getBestProdInfo,
   getLogin,
+  getTicket,
   setReservacion,
   setSuscripcion,
   setUsuario,
@@ -164,8 +165,14 @@ app.post("/api/setReservacion", async (req, res) => {
         console.log(values);
         const data = await setReservacion(values);
         //console.log(data);
-        err[0].ticket = data[0].ticket;
-        if (!err[0].ticket == undefined) {
+        let ticketData = {
+          id: req.session.id,
+          fecha: date,
+          hora: time,
+        };
+        const ticket = await getTicket(ticketData);
+        err[0].ticket = ticket[0].ticket;
+        if (!err[0].ticket == "" && !err[0].ticket == undefined) {
           err[0].res = 1;
         }
         console.log(err);
@@ -207,7 +214,6 @@ app.post("/api/register", async (req, res) => {
         res.json(data);
       });
     } else {
-      console.log(1);
       res.json(err);
     }
   } catch (err) {
@@ -300,4 +306,4 @@ async function test() {
   const data = await setReservacion(values);
   console.log(data);
 }
-test();
+//test();
