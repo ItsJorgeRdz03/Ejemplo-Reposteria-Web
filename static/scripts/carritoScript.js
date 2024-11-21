@@ -135,7 +135,7 @@ document.querySelector(".logout").addEventListener("click", async () => {
   let respuestaJson = await res.json();
   if (respuestaJson[0].res == 1) {
     checkLogin();
-    localStorage.setItem("index");
+    localStorage.setItem("index", "");
     location.href = "/";
   }
 });
@@ -156,4 +156,3 @@ renderItems();
 updateTotal();
 //document.querySelector(".user-name").innerText = respuestaJson.name;
 //localStorage.setItem("index", "");
-console.log(localStorage.getItem("index"));
