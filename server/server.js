@@ -164,6 +164,7 @@ app.post("/api/setReservacion", async (req, res) => {
         };
         console.log(values);
         const data = await setReservacion(values);
+        console.log(data);
         //console.log(data);
         let ticketData = {
           id: req.session.id,
@@ -171,8 +172,8 @@ app.post("/api/setReservacion", async (req, res) => {
           hora: time,
         };
         const ticket = await getTicket(ticketData);
-        err[0].ticket = ticket[0].ticket;
-        if (!err[0].ticket == "" && !err[0].ticket == undefined) {
+        err[0].ticket = await ticket[0][0].fkIdTicket;
+        if (err[0].ticket != "" && err[0].ticket != undefined) {
           err[0].res = 1;
         }
         console.log(err);
@@ -230,7 +231,6 @@ app.post("/api/login", async (req, res) => {
     if (!check.checkPass(req.body.pass)) checked = false;
     if (checked) {
       const data = await getLogin(req.body.email);
-      console.log(data);
       let result;
       try {
         result = await bcrypt.compare(req.body.pass, data[0][0].pswd);
