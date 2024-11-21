@@ -143,6 +143,7 @@ document.querySelector(".logout").addEventListener("click", async () => {
 document.getElementById("close").addEventListener("click", () => {
   document.querySelector(".popup").classList.remove("show");
   document.body.style.overflow = "visible";
+  localStorage.setItem("index", "");
   location.href = "/reservar";
 });
 
