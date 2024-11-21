@@ -113,7 +113,7 @@ export async function getLogin(data) {
 export async function getTicket(data) {
   try {
     console.log("Consulta iniciada");
-    let query = `CALL getTicket(${data.id});`;
+    let query = `CALL getTicket(${data.id}, "${data.fecha}", "${data.hora}");`;
     const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
     endConnection();
     return rows; // Retornamos las filas afectadas
