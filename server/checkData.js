@@ -106,3 +106,7 @@ export function checkPass(pswd) {
   }
   return true;
 }
+
+export function parseDate(date) {
+  return date.toString();
+}
