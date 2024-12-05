@@ -1,0 +1,264 @@
+/* Estilo general */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff4f4;
+  color: #333;
+}
+
+header {
+  background-color: #e0656f;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo a {
+  color: #fff;
+  font-size: 24px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 15px;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+header nav ul li a.active {
+  text-decoration: underline;
+}
+
+main {
+  padding: 20px;
+}
+
+.info-usuario {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fdfdfd;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+}
+
+.info-usuario h2 {
+  text-align: center;
+  font-size: 24px;
+  color: #e0656f;
+  margin-bottom: 20px;
+}
+
+/* Tarjeta del perfil */
+.profile-card {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card svg {
+  fill: white;
+}
+
+/* Encabezado de la tarjeta */
+.profile-header {
+  text-align: center;
+  background: linear-gradient(135deg, #e0656f, #f28d95);
+  padding: 20px;
+  color: #fff;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  margin-bottom: 15px;
+}
+
+.profile-header h3 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.profile-role {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Cuerpo de la tarjeta */
+.profile-body {
+  padding: 20px;
+  background-color: #fafafa;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-row label {
+  font-weight: bold;
+  color: #333;
+}
+
+.info-row span {
+  color: #555;
+}
+
+/* Pie de la tarjeta */
+.profile-footer {
+  text-align: center;
+  padding: 15px 20px;
+  background-color: #f8f8f8;
+}
+
+.profile-footer button {
+  background-color: #e0656f;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.profile-footer button:hover {
+  background-color: #d55462;
+}
+
+.historial-reservas {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fdfdfd;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+}
+
+.historial-reservas h2 {
+  text-align: center;
+  font-size: 24px;
+  color: #e0656f;
+  margin-bottom: 20px;
+}
+
+/* Lista de reservas */
+.reservas-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reserva-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.idP {
+  display: none;
+}
+
+/* Información de la reserva */
+.reserva-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.reserva-info p strong {
+  font-weight: bold;
+}
+
+.reserva-info .estado {
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+.estado-en-proceso {
+  color: #e0656f;
+  background-color: #fde2e5;
+}
+
+.estado-listo {
+  color: #4caf50;
+  background-color: #e8f5e9;
+}
+
+.confirmado {
+  color: #4caf7d;
+  background-color: #e8f5ec;
+}
+
+.cancelado {
+  color: #f32525;
+  background-color: #f5e8e9;
+}
+
+/* Acciones */
+.reserva-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn.cancelar {
+  background-color: #e0656f;
+  color: #fff;
+}
+
+.btn.cancelar:hover {
+  background-color: #d55462;
+}
+
+.btn.confirmar {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.btn.confirmar:hover {
+  background-color: #3e8e41;
+}
+
+.btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
