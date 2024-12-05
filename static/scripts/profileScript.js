@@ -149,8 +149,10 @@ async function setBtns() {
         console.log(respuestaJson);
         if (respuestaJson[0].res == 1) {
           if (data.st == 3) {
+            card.querySelector(".estado").innerText = "Recogido";
             card.querySelector(".estado").className = "estado confirmado";
           } else if (data.st == 4) {
+            card.querySelector(".estado").innerText = "Cancelado";
             card.querySelector(".estado").className = "estado cancelado";
           }
           card.querySelector(".btn.cancelar").disabled = true;
