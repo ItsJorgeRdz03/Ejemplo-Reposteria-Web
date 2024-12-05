@@ -10,9 +10,12 @@ import {
   getBestProdInfo,
   getLogin,
   getTicket,
+  getUserData,
+  getReserveData,
   setReservacion,
   setSuscripcion,
   setUsuario,
+  updateReserva,
 } from "./database.js";
 import * as check from "./checkData.js";
 
@@ -41,6 +44,7 @@ app.use("/script", express.static(path.join(__dirname, "../static/scripts")));
 
 app.get("/", async (req, res) => {
   res.sendFile(path.join(__dirname, "../static/pages/inicio.html"));
+  console.log(req.session.id);
 });
 
 app.get("/login", async (req, res) => {
@@ -62,6 +66,14 @@ app.get("/reservar", async (req, res) => {
 app.get("/carrito", async (req, res) => {
   if (req.cookies.access_token) {
     res.sendFile(path.join(__dirname, "../static/pages/carrito.html"));
+  } else {
+    res.sendFile(path.join(__dirname, "../static/pages/estadoLogin.html"));
+  }
+});
+
+app.get("/perfil", async (req, res) => {
+  if (req.cookies.access_token) {
+    res.sendFile(path.join(__dirname, "../static/pages/perfil.html"));
   } else {
     res.sendFile(path.join(__dirname, "../static/pages/estadoLogin.html"));
   }
@@ -168,8 +180,8 @@ app.post("/api/setReservacion", async (req, res) => {
         //console.log(data);
         let ticketData = {
           id: req.session.id,
-          fecha: date,
-          hora: time,
+          fecha: values.fecha,
+          hora: values.hora,
         };
         const ticket = await getTicket(ticketData);
         err[0].ticket = await ticket[0][0].fkIdTicket;
@@ -268,6 +280,63 @@ app.post("/api/login", async (req, res) => {
   } catch (err) {
     console.error(messageError, err);
     res.status(500).send(messageError);
+  }
+});
+
+app.post("/api/getUserData", async (req, res) => {
+  if (req.cookies.access_token && req.session.id) {
+    try {
+      let data = await getUserData(req.session.id);
+      data = {
+        nombre:
+          data[0][0].nombre +
+          " " +
+          data[0][0].paterno +
+          " " +
+          data[0][0].materno,
+        email: data[0][0].email,
+        telefono: data[0][0].telefono,
+        genero: data[0][0].genero,
+        fechaNac: data[0][0].fechaNac,
+        res: 1,
+      };
+      console.log(check.parseDate(data.fechaNac));
+      res.json(data);
+    } catch (err) {
+      console.error(messageError, err);
+      res.status(500).send(messageError);
+    }
+  } else {
+    res.json([{ res: 0 }]);
+  }
+});
+
+app.post("/api/getReserveData", async (req, res) => {
+  if (req.cookies.access_token && req.session.id) {
+    try {
+      const data = await getReserveData(req.session.id);
+      data[0][0].res = 1;
+      res.json(data);
+    } catch (err) {
+      console.error(messageError, err);
+      res.status(500).send(messageError);
+    }
+  } else {
+    res.json([{ res: 0 }]);
+  }
+});
+
+app.post("/api/updateReserva", async (req, res) => {
+  if (req.cookies.access_token && req.session.id) {
+    try {
+      let data = req.body;
+      data.user = req.session.id;
+      await updateReserva(data);
+      res.json([{ res: 1 }]);
+    } catch (err) {
+      console.error(messageError, err);
+      res.status(500).send(messageError);
+    }
   }
 });
 
