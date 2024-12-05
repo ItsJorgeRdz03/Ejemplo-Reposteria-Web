@@ -122,6 +122,42 @@ export async function getTicket(data) {
   }
 }
 
+export async function getUserData(id) {
+  try {
+    console.log("Consulta iniciada");
+    let query = `CALL getUserData(${id});`;
+    const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
+    endConnection();
+    return rows; // Retornamos las filas afectadas
+  } catch (err) {
+    console.error(messageError, err);
+  }
+}
+
+export async function getReserveData(id) {
+  try {
+    console.log("Consulta iniciada");
+    let query = `CALL getReserveData(${id});`;
+    const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
+    endConnection();
+    return rows; // Retornamos las filas afectadas
+  } catch (err) {
+    console.error(messageError, err);
+  }
+}
+
+export async function updateReserva(data) {
+  try {
+    console.log("Consulta iniciada");
+    let query = `CALL updateReserve(${data.user}, ${data.prod}, "${data.ticket}", ${data.st});`;
+    const [rows, fields] = await connection.query(query); // Ejecutamos el query y almacenamos resultados
+    endConnection();
+    return rows; // Retornamos las filas afectadas
+  } catch (err) {
+    console.error(messageError, err);
+  }
+}
+
 export async function test() {
   try {
     console.log("Consulta iniciada");
